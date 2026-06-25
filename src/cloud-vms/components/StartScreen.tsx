@@ -54,7 +54,7 @@ const PERKS: { i: IconComponent; t: string; d: string }[] = [
 /* ───────────── QUALIFICAÇÃO (gate da calculadora /cloud-vms/calcular) ─────────────
    Contato (nome, e-mail, empresa, WhatsApp) já vem do formulário do site (Elementor),
    correlacionado por um ID oculto na URL. Aqui captamos só a qualificação. */
-export function StartScreen({ onStart, onHome }: StartScreenProps) {
+export function StartScreen({ onStart }: StartScreenProps) {
   const [lead, setLead] = useState<Lead>({
     nome: "",
     sobrenome: "",
@@ -100,23 +100,8 @@ export function StartScreen({ onStart, onHome }: StartScreenProps) {
   return (
     <div className="min-h-screen flex flex-col" style={{ background: T.off }}>
       <header className="border-b" style={{ borderColor: T.border, background: "#fff" }}>
-        <div className="max-w-5xl mx-auto px-5 h-16 flex items-center justify-between">
-          {onHome ? (
-            <button onClick={onHome} className="bg-transparent border-0 p-0 cursor-pointer" aria-label="Voltar para a página inicial">
-              <Logo height={24} />
-            </button>
-          ) : (
-            <span className="inline-flex"><Logo height={24} /></span>
-          )}
-          {onHome && (
-            <button
-              onClick={onHome}
-              className="font-ui font-semibold text-xs flex items-center gap-1 cursor-pointer bg-transparent border-0"
-              style={{ color: T.gray }}
-            >
-              <IconChevronLeft size={14} /> Voltar ao site
-            </button>
-          )}
+        <div className="max-w-5xl mx-auto px-5 h-16 flex items-center justify-center">
+          <span className="inline-flex"><Logo height={24} /></span>
         </div>
       </header>
 
