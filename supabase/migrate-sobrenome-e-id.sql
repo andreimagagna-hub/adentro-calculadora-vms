@@ -166,5 +166,6 @@ $$;
 
 grant execute on function public.submit_cloud_vms(jsonb) to anon, authenticated;
 
--- 4) Opcional — remover o lead de teste criado durante a verificação:
--- delete from public.cloud_vms_leads where nome = 'TESTE_CLAUDE';
+-- 4) Opcional — remover os leads de teste criados durante a verificação:
+-- delete from public.cloud_vms_leads
+--  where nome like 'TESTE_CLAUDE%' or email = 'teste.claude@adentro.com.br';
