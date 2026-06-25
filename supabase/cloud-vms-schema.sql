@@ -29,7 +29,14 @@ create table if not exists public.cloud_vms_leads (
   cargo        text,   -- picklist Salesforce
   funcionarios text,   -- faixa de quantidade de funcionários
   cotando      text,   -- já está cotando com outras empresas? (Sim/Não)
-  previsao     text    -- tempo estimado para iniciar o projeto (picklist Salesforce)
+  previsao     text,   -- tempo estimado para iniciar o projeto (picklist Salesforce)
+  -- tracking de campanha (campos ocultos capturados da URL)
+  utm_source   text,
+  utm_medium   text,
+  utm_campaign text,
+  utm_content  text,
+  utm_term     text,
+  gclid        text
 );
 
 -- Colunas novas em bases já existentes (idempotente).
@@ -40,6 +47,12 @@ alter table public.cloud_vms_leads add column if not exists cargo        text;
 alter table public.cloud_vms_leads add column if not exists funcionarios text;
 alter table public.cloud_vms_leads add column if not exists cotando      text;
 alter table public.cloud_vms_leads add column if not exists previsao     text;
+alter table public.cloud_vms_leads add column if not exists utm_source   text;
+alter table public.cloud_vms_leads add column if not exists utm_medium   text;
+alter table public.cloud_vms_leads add column if not exists utm_campaign text;
+alter table public.cloud_vms_leads add column if not exists utm_content  text;
+alter table public.cloud_vms_leads add column if not exists utm_term     text;
+alter table public.cloud_vms_leads add column if not exists gclid        text;
 
 -- ────────────────────────────────────────────────────────────────────
 --  2. SUBMISSÕES  (cada projeto dimensionado)
@@ -109,7 +122,6 @@ declare
   v_lead_id uuid;
   v_submission_id uuid;
 begin
-  -- Correlaciona o lead: (1) pelo id do gate, (2) por e-mail, (3) novo lead.
   if v_in_id is not null then
     update public.cloud_vms_leads set
       nome = coalesce(v_lead->>'nome', nome),
@@ -124,20 +136,28 @@ begin
       funcionarios = coalesce(v_lead->>'funcionarios', funcionarios),
       cotando = coalesce(v_lead->>'cotando', cotando),
       previsao = coalesce(v_lead->>'previsao', previsao),
+      utm_source = coalesce(v_lead->>'utm_source', utm_source),
+      utm_medium = coalesce(v_lead->>'utm_medium', utm_medium),
+      utm_campaign = coalesce(v_lead->>'utm_campaign', utm_campaign),
+      utm_content = coalesce(v_lead->>'utm_content', utm_content),
+      utm_term = coalesce(v_lead->>'utm_term', utm_term),
+      gclid = coalesce(v_lead->>'gclid', gclid),
       updated_at = now()
     where id = v_in_id
     returning id into v_lead_id;
   end if;
 
   if v_lead_id is null and v_email is not null then
-    -- upsert por e-mail (modo embed/site)
     insert into public.cloud_vms_leads
       (nome, sobrenome, empresa, email, whatsapp, perfil,
-       origem, indicacao, cargo, funcionarios, cotando, previsao)
+       origem, indicacao, cargo, funcionarios, cotando, previsao,
+       utm_source, utm_medium, utm_campaign, utm_content, utm_term, gclid)
     values (v_lead->>'nome', v_lead->>'sobrenome', v_lead->>'empresa', v_email,
             v_lead->>'whatsapp', v_lead->>'perfil',
             v_lead->>'origem', v_lead->>'indicacao', v_lead->>'cargo',
-            v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao')
+            v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao',
+            v_lead->>'utm_source', v_lead->>'utm_medium', v_lead->>'utm_campaign',
+            v_lead->>'utm_content', v_lead->>'utm_term', v_lead->>'gclid')
     on conflict (email) do update
       set nome = excluded.nome, sobrenome = excluded.sobrenome,
           empresa = excluded.empresa,
@@ -148,23 +168,30 @@ begin
           funcionarios = coalesce(excluded.funcionarios, cloud_vms_leads.funcionarios),
           cotando      = coalesce(excluded.cotando,      cloud_vms_leads.cotando),
           previsao     = coalesce(excluded.previsao,     cloud_vms_leads.previsao),
+          utm_source   = coalesce(excluded.utm_source,   cloud_vms_leads.utm_source),
+          utm_medium   = coalesce(excluded.utm_medium,   cloud_vms_leads.utm_medium),
+          utm_campaign = coalesce(excluded.utm_campaign, cloud_vms_leads.utm_campaign),
+          utm_content  = coalesce(excluded.utm_content,  cloud_vms_leads.utm_content),
+          utm_term     = coalesce(excluded.utm_term,     cloud_vms_leads.utm_term),
+          gclid        = coalesce(excluded.gclid,        cloud_vms_leads.gclid),
           updated_at = now()
     returning id into v_lead_id;
   end if;
 
   if v_lead_id is null then
-    -- novo lead (modo standalone sem e-mail)
     insert into public.cloud_vms_leads
       (nome, sobrenome, empresa, email, whatsapp, perfil,
-       origem, indicacao, cargo, funcionarios, cotando, previsao)
+       origem, indicacao, cargo, funcionarios, cotando, previsao,
+       utm_source, utm_medium, utm_campaign, utm_content, utm_term, gclid)
     values (v_lead->>'nome', v_lead->>'sobrenome', v_lead->>'empresa', v_email,
             v_lead->>'whatsapp', v_lead->>'perfil',
             v_lead->>'origem', v_lead->>'indicacao', v_lead->>'cargo',
-            v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao')
+            v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao',
+            v_lead->>'utm_source', v_lead->>'utm_medium', v_lead->>'utm_campaign',
+            v_lead->>'utm_content', v_lead->>'utm_term', v_lead->>'gclid')
     returning id into v_lead_id;
   end if;
 
-  -- submissão (configuração + dimensionamento)
   insert into public.cloud_vms_submissions (
     lead_id, vms, cameras, viewers, resolution, codec, fps, retention, rec_type, movement,
     os, storage_util_gb, storage_servidor_gb, link_min_mbps, link_ideal_mbps, num_servers,
@@ -205,9 +232,10 @@ grant execute on function public.submit_cloud_vms(jsonb) to anon, authenticated;
 
 -- ────────────────────────────────────────────────────────────────────
 --  5. RPC  save_cloud_vms_lead(payload jsonb)
---     Captura o lead JÁ no cadastro (gate da calculadora), sem submissão.
---     Upsert por e-mail. Retorna o id do lead.
+--     Captura o lead JÁ no cadastro (gate). Upsert por e-mail; sem e-mail,
+--     cria lead novo cujo id correlaciona com a submissão. Grava tracking.
 -- ────────────────────────────────────────────────────────────────────
+
 create or replace function public.save_cloud_vms_lead(payload jsonb)
 returns uuid
 language plpgsql
@@ -220,14 +248,16 @@ declare
   v_lead_id uuid;
 begin
   if v_email is not null then
-    -- upsert por e-mail (modo embed/site)
     insert into public.cloud_vms_leads
       (nome, sobrenome, empresa, email, whatsapp, perfil,
-       origem, indicacao, cargo, funcionarios, cotando, previsao)
+       origem, indicacao, cargo, funcionarios, cotando, previsao,
+       utm_source, utm_medium, utm_campaign, utm_content, utm_term, gclid)
     values (v_lead->>'nome', v_lead->>'sobrenome', v_lead->>'empresa', v_email,
             v_lead->>'whatsapp', v_lead->>'perfil',
             v_lead->>'origem', v_lead->>'indicacao', v_lead->>'cargo',
-            v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao')
+            v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao',
+            v_lead->>'utm_source', v_lead->>'utm_medium', v_lead->>'utm_campaign',
+            v_lead->>'utm_content', v_lead->>'utm_term', v_lead->>'gclid')
     on conflict (email) do update
       set nome = excluded.nome, sobrenome = excluded.sobrenome,
           empresa = excluded.empresa,
@@ -238,17 +268,25 @@ begin
           funcionarios = coalesce(excluded.funcionarios, cloud_vms_leads.funcionarios),
           cotando      = coalesce(excluded.cotando,      cloud_vms_leads.cotando),
           previsao     = coalesce(excluded.previsao,     cloud_vms_leads.previsao),
+          utm_source   = coalesce(excluded.utm_source,   cloud_vms_leads.utm_source),
+          utm_medium   = coalesce(excluded.utm_medium,   cloud_vms_leads.utm_medium),
+          utm_campaign = coalesce(excluded.utm_campaign, cloud_vms_leads.utm_campaign),
+          utm_content  = coalesce(excluded.utm_content,  cloud_vms_leads.utm_content),
+          utm_term     = coalesce(excluded.utm_term,     cloud_vms_leads.utm_term),
+          gclid        = coalesce(excluded.gclid,        cloud_vms_leads.gclid),
           updated_at = now()
     returning id into v_lead_id;
   else
-    -- novo lead (modo standalone sem e-mail) — id correlaciona com a submissão
     insert into public.cloud_vms_leads
       (nome, sobrenome, empresa, email, whatsapp, perfil,
-       origem, indicacao, cargo, funcionarios, cotando, previsao)
+       origem, indicacao, cargo, funcionarios, cotando, previsao,
+       utm_source, utm_medium, utm_campaign, utm_content, utm_term, gclid)
     values (v_lead->>'nome', v_lead->>'sobrenome', v_lead->>'empresa', null,
             v_lead->>'whatsapp', v_lead->>'perfil',
             v_lead->>'origem', v_lead->>'indicacao', v_lead->>'cargo',
-            v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao')
+            v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao',
+            v_lead->>'utm_source', v_lead->>'utm_medium', v_lead->>'utm_campaign',
+            v_lead->>'utm_content', v_lead->>'utm_term', v_lead->>'gclid')
     returning id into v_lead_id;
   end if;
 

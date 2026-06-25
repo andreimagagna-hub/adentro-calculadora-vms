@@ -12,7 +12,7 @@ import {
   IconCheck,
   type IconComponent,
 } from "./icons";
-import { useEmbeddedContact, mergeContact } from "../../lib/embed";
+import { useEmbeddedContact, mergeContact, readTrackingFromUrl, TRACKING_KEYS } from "../../lib/embed";
 import type { Lead } from "../lib/api";
 
 interface StartScreenProps {
@@ -69,6 +69,9 @@ export function StartScreen({ onStart, onHome }: StartScreenProps) {
   const [step, setStep] = useState<1 | 2>(1);
   useEffect(() => {
     document.title = "Calculadora de VMS na Nuvem — Adentro Tecnologia";
+    // captura tracking de campanha (UTMs + gclid) da URL → campos ocultos
+    const tracking = readTrackingFromUrl();
+    if (Object.keys(tracking).length) setLead((p) => ({ ...p, ...tracking }));
   }, []);
   // Contato pode vir do site (URL/postMessage do iframe) quando embedada;
   // no domínio próprio (seg.adentro.com.br) é preenchido aqui mesmo.
@@ -164,6 +167,10 @@ export function StartScreen({ onStart, onHome }: StartScreenProps) {
                 </p>
 
                 <div className="space-y-4">
+                  {/* campos ocultos — tracking de campanha (UTMs + gclid) */}
+                  {TRACKING_KEYS.map((k) => (
+                    <input key={k} type="hidden" name={k} value={(lead[k] as string) ?? ""} readOnly />
+                  ))}
                   <div className="grid grid-cols-2 gap-3">
                     <Input label="Nome" value={lead.nome ?? ""} onChange={set("nome")} placeholder="Seu nome" autoComplete="given-name" />
                     <Input label="Sobrenome" value={lead.sobrenome ?? ""} onChange={set("sobrenome")} placeholder="Seu sobrenome" autoComplete="family-name" />

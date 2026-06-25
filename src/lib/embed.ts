@@ -49,6 +49,32 @@ export function readContactFromUrl(): EmbedContact {
   };
 }
 
+/* ───────────── TRACKING (UTMs + gclid) ─────────────
+   Campos ocultos capturados da query string da URL para atribuição de
+   campanha. Persistidos junto do lead. */
+export const TRACKING_KEYS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_content",
+  "utm_term",
+  "gclid",
+] as const;
+
+export type TrackingParams = Partial<Record<(typeof TRACKING_KEYS)[number], string>>;
+
+/** Lê os parâmetros de tracking presentes na URL (apenas os preenchidos). */
+export function readTrackingFromUrl(): TrackingParams {
+  if (typeof window === "undefined") return {};
+  const p = new URLSearchParams(window.location.search);
+  const out: TrackingParams = {};
+  for (const k of TRACKING_KEYS) {
+    const v = (p.get(k) ?? "").trim();
+    if (v) out[k] = v;
+  }
+  return out;
+}
+
 /** Mescla no estado anterior apenas os campos de contato preenchidos. */
 export function mergeContact<T extends EmbedContact>(prev: T, c: EmbedContact): T {
   const next = { ...prev };

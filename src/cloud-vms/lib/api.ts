@@ -23,6 +23,13 @@ export interface Lead {
   cotando?: string;
   /** Tempo estimado para iniciar o projeto (picklist Salesforce). */
   previsao?: string;
+  /* ── Tracking de campanha (campos ocultos, capturados da URL) ── */
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+  utm_term?: string;
+  gclid?: string;
 }
 
 export type SaveResult =
@@ -49,6 +56,12 @@ export function buildPayload(lead: Lead, input: CalcInput, result?: CalcResult) 
       funcionarios: lead.funcionarios ?? null,
       cotando: lead.cotando ?? null,
       previsao: lead.previsao ?? null,
+      utm_source: lead.utm_source ?? null,
+      utm_medium: lead.utm_medium ?? null,
+      utm_campaign: lead.utm_campaign ?? null,
+      utm_content: lead.utm_content ?? null,
+      utm_term: lead.utm_term ?? null,
+      gclid: lead.gclid ?? null,
     },
     config: {
       vms: input.vms,
@@ -110,6 +123,12 @@ export async function saveVmsLeadOnly(lead: Lead): Promise<SaveResult> {
           funcionarios: lead.funcionarios ?? null,
           cotando: lead.cotando ?? null,
           previsao: lead.previsao ?? null,
+          utm_source: lead.utm_source ?? null,
+          utm_medium: lead.utm_medium ?? null,
+          utm_campaign: lead.utm_campaign ?? null,
+          utm_content: lead.utm_content ?? null,
+          utm_term: lead.utm_term ?? null,
+          gclid: lead.gclid ?? null,
         },
       },
     });
