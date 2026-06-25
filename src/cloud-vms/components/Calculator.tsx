@@ -128,20 +128,20 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
           </p>
         </div>
 
-        <div className="mt-8 grid lg:grid-cols-[1.25fr_1fr] gap-6 items-start">
-          {/* ── PAINEL DE CONFIGURAÇÃO ── */}
-          <div className="space-y-6">
-            {/* VMS */}
+        <div className="mt-6 grid lg:grid-cols-[1.25fr_1fr] gap-6 items-start">
+          {/* ── PAINEL DE CONFIGURAÇÃO (compacto: 3 blocos) ── */}
+          <div className="space-y-4">
+            {/* 1 · VMS */}
             <Card>
               <SectionTitle n={1} icon={IconShield}>Qual VMS você utiliza?</SectionTitle>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3">
                 {VMS_OPTIONS.map((v) => {
                   const active = input.vms === v.id;
                   return (
                     <button
                       key={v.id}
                       onClick={() => set("vms", v.id)}
-                      className="relative rounded-xl border p-3 text-center cursor-pointer transition"
+                      className="relative rounded-xl border px-2 py-2.5 text-center cursor-pointer transition"
                       style={{
                         borderColor: active ? T.orange : T.border,
                         background: active ? T.tint : "#fff",
@@ -154,114 +154,112 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
                         </span>
                       )}
                       <div className="font-d font-bold text-sm" style={{ color: T.ink }}>{v.brand}</div>
-                      <div className="font-b text-xs mt-0.5" style={{ color: T.gray }}>{v.name}</div>
+                      <div className="font-b text-[11px] mt-0.5" style={{ color: T.gray }}>{v.name}</div>
                     </button>
                   );
                 })}
               </div>
-              <div className="mt-3 rounded-xl px-3.5 py-2.5 flex items-start gap-2 text-xs font-b" style={{ background: "#E8F5E9", color: "#1B5E20" }}>
-                <IconCheck size={15} />
+              <div className="mt-3 rounded-xl px-3 py-2 flex items-start gap-2 text-xs font-b" style={{ background: "#E8F5E9", color: "#1B5E20" }}>
+                <IconCheck size={14} />
                 <span>
-                  Perfil <strong>{profile.label}</strong> ({profile.os === "linux" ? "Linux" : "Windows"}) — {profile.note}. O cálculo é ajustado ao consumo da plataforma.
+                  Perfil <strong>{profile.label}</strong> ({profile.os === "linux" ? "Linux" : "Windows"}) — {profile.note}.
                 </span>
               </div>
             </Card>
 
-            {/* Câmeras */}
+            {/* 2 · Câmeras e qualidade de imagem */}
             <Card>
-              <SectionTitle n={2} icon={IconCamera}>Quantidade de câmeras</SectionTitle>
-              <Counter value={input.cameras} onChange={(v) => set("cameras", Math.max(1, v))} step={10} min={1} unit="câmeras" />
-            </Card>
+              <SectionTitle n={2} icon={IconCamera}>Câmeras e qualidade de imagem</SectionTitle>
 
-            {/* Resolução */}
-            <Card>
-              <SectionTitle n={3} icon={IconVideo}>Resolução média</SectionTitle>
-              <div className="flex flex-wrap gap-2 mt-4">
-                {RESOLUTIONS.map((o) => (
-                  <button
-                    key={o.id}
-                    onClick={() => set("resolution", o.id)}
-                    className={`pill font-b text-xs font-semibold rounded-lg border px-3 py-2 ${input.resolution === o.id ? "active" : ""}`}
-                    style={input.resolution === o.id ? {} : { borderColor: T.border, color: T.body, background: "#fff" }}
-                  >
-                    {o.label}
-                  </button>
-                ))}
-                <button
-                  onClick={() => setResModalOpen(true)}
-                  className={`pill font-b text-xs font-semibold rounded-lg border px-3 py-2 ${!isMainRes ? "active" : ""}`}
-                  style={!isMainRes ? {} : { borderColor: T.border, color: T.body, background: "#fff" }}
-                >
-                  Outros ▾
-                </button>
+              <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4 mt-4">
+                <Field label="Quantidade de câmeras">
+                  <Counter value={input.cameras} onChange={(v) => set("cameras", Math.max(1, v))} step={10} min={1} />
+                </Field>
+                <Field label="Dias de retenção">
+                  <Counter value={input.retention} onChange={(v) => set("retention", v)} step={5} min={0} max={365} />
+                </Field>
               </div>
-              {!isMainRes && outrosLabel && (
-                <div className="font-b text-xs mt-2" style={{ color: T.gray }}>
-                  Resolução personalizada: <strong style={{ color: T.ink }}>{outrosLabel}</strong>
-                </div>
-              )}
-            </Card>
 
-            {/* FPS + Codec */}
-            <div className="grid sm:grid-cols-2 gap-6">
-              <Card>
-                <SectionTitle n={4} icon={IconGauge}>Frames por Segundo (FPS)</SectionTitle>
-                <Counter value={input.fps} onChange={(v) => set("fps", v)} step={1} min={3} max={30} unit="FPS" />
-              </Card>
-              <Card>
-                <SectionTitle n={5} icon={IconDatabase}>Codec</SectionTitle>
-                <Pills options={CODECS} value={input.codec} onChange={(v) => set("codec", v)} />
-              </Card>
-            </div>
-
-            {/* Retenção */}
-            <Card>
-              <SectionTitle n={6} icon={IconClock}>Dias de retenção</SectionTitle>
-              <Counter value={input.retention} onChange={(v) => set("retention", v)} step={5} min={0} max={365} unit="dias" />
-            </Card>
-
-            {/* Tipo de gravação */}
-            <Card>
-              <SectionTitle n={7} icon={IconVideo}>Tipo de gravação</SectionTitle>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-4">
-                {REC_TYPES.map((r) => {
-                  const active = input.recType === r.id;
-                  return (
+              <Field label="Resolução média" className="mt-4">
+                <div className="flex flex-wrap gap-2">
+                  {RESOLUTIONS.map((o) => (
                     <button
-                      key={r.id}
-                      onClick={() => set("recType", r.id)}
-                      className="rounded-xl border p-3 flex flex-col items-center gap-2 cursor-pointer transition"
-                      style={{
-                        borderColor: active ? T.orange : T.border,
-                        background: active ? T.tint : "#fff",
-                        color: active ? T.orangeStrong : T.gray,
-                      }}
+                      key={o.id}
+                      onClick={() => set("resolution", o.id)}
+                      className={`pill font-b text-xs font-semibold rounded-lg border px-3 py-2 ${input.resolution === o.id ? "active" : ""}`}
+                      style={input.resolution === o.id ? {} : { borderColor: T.border, color: T.body, background: "#fff" }}
                     >
-                      <r.icon size={20} color={active ? T.orange : T.gray} />
-                      <span className="font-b text-xs font-semibold text-center" style={{ color: active ? T.ink : T.gray }}>{r.label}</span>
+                      {o.label}
                     </button>
-                  );
-                })}
-              </div>
-              {input.recType === "motion" && (
-                <div className="mt-4">
-                  <div className="font-b text-xs font-semibold mb-1" style={{ color: T.gray }}>Sensibilidade de movimento</div>
-                  <Slider
-                    value={Math.round(input.movement * 100)}
-                    min={10}
-                    max={100}
-                    step={10}
-                    onChange={(v) => set("movement", v / 100)}
-                    display={`${Math.round(input.movement * 100)}%`}
-                  />
+                  ))}
+                  <button
+                    onClick={() => setResModalOpen(true)}
+                    className={`pill font-b text-xs font-semibold rounded-lg border px-3 py-2 ${!isMainRes ? "active" : ""}`}
+                    style={!isMainRes ? {} : { borderColor: T.border, color: T.body, background: "#fff" }}
+                  >
+                    Outros ▾
+                  </button>
                 </div>
-              )}
+                {!isMainRes && outrosLabel && (
+                  <div className="font-b text-xs mt-2" style={{ color: T.gray }}>
+                    Personalizada: <strong style={{ color: T.ink }}>{outrosLabel}</strong>
+                  </div>
+                )}
+              </Field>
+
+              <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4 mt-4">
+                <Field label="Frames por segundo (FPS)">
+                  <Counter value={input.fps} onChange={(v) => set("fps", v)} step={1} min={3} max={30} />
+                </Field>
+                <Field label="Codec">
+                  <Pills options={CODECS} value={input.codec} onChange={(v) => set("codec", v)} />
+                </Field>
+              </div>
             </Card>
 
-            {/* Visualização de câmeras */}
+            {/* 3 · Gravação e acesso */}
             <Card>
-              <SectionTitle n={8} icon={IconEye}>Visualização de Câmeras</SectionTitle>
-              <Counter value={input.viewers} onChange={(v) => set("viewers", Math.max(0, v))} step={1} min={0} unit="usuários simultâneos" />
+              <SectionTitle n={3} icon={IconVideo}>Gravação e acesso</SectionTitle>
+
+              <Field label="Tipo de gravação" className="mt-4">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {REC_TYPES.map((r) => {
+                    const active = input.recType === r.id;
+                    return (
+                      <button
+                        key={r.id}
+                        onClick={() => set("recType", r.id)}
+                        className="rounded-xl border px-2 py-2.5 flex flex-col items-center gap-1.5 cursor-pointer transition"
+                        style={{
+                          borderColor: active ? T.orange : T.border,
+                          background: active ? T.tint : "#fff",
+                          color: active ? T.orangeStrong : T.gray,
+                        }}
+                      >
+                        <r.icon size={18} color={active ? T.orange : T.gray} />
+                        <span className="font-b text-[11px] font-semibold text-center leading-tight" style={{ color: active ? T.ink : T.gray }}>{r.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                {input.recType === "motion" && (
+                  <div className="mt-3">
+                    <div className="font-b text-xs font-semibold mb-1" style={{ color: T.gray }}>Sensibilidade de movimento</div>
+                    <Slider
+                      value={Math.round(input.movement * 100)}
+                      min={10}
+                      max={100}
+                      step={10}
+                      onChange={(v) => set("movement", v / 100)}
+                      display={`${Math.round(input.movement * 100)}%`}
+                    />
+                  </div>
+                )}
+              </Field>
+
+              <Field label="Visualização simultânea (usuários)" className="mt-4">
+                <Counter value={input.viewers} onChange={(v) => set("viewers", Math.max(0, v))} step={1} min={0} />
+              </Field>
             </Card>
           </div>
 
@@ -406,7 +404,7 @@ function ResModal({ current, onSelect, onClose }: { current: string; onSelect: (
 /* ───────────── SUBCOMPONENTES ───────────── */
 function Card({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-2xl border bg-white p-5 md:p-6" style={{ borderColor: T.border, boxShadow: "0 2px 8px rgba(4,12,82,.04)" }}>
+    <div className="rounded-2xl border bg-white p-4 md:p-5" style={{ borderColor: T.border, boxShadow: "0 2px 8px rgba(4,12,82,.04)" }}>
       {children}
     </div>
   );
@@ -422,22 +420,31 @@ function SectionTitle({ n, icon: Icon, children }: { n: number; icon: IconCompon
   );
 }
 
-function Counter({ value, onChange, step, min, max, unit }: { value: number; onChange: (v: number) => void; step: number; min: number; max?: number; unit: string }) {
+function Field({ label, children, className = "" }: { label: string; children: React.ReactNode; className?: string }) {
+  return (
+    <div className={className}>
+      <div className="font-b text-xs font-semibold mb-2" style={{ color: T.gray }}>{label}</div>
+      {children}
+    </div>
+  );
+}
+
+function Counter({ value, onChange, step, min, max, unit }: { value: number; onChange: (v: number) => void; step: number; min: number; max?: number; unit?: string }) {
   const clamp = (v: number) => Math.min(max ?? Infinity, Math.max(min, v));
   return (
-    <div className="flex items-center gap-3 mt-4">
-      <button onClick={() => onChange(clamp(value - step))} className="w-10 h-10 rounded-xl border font-d font-bold text-lg cursor-pointer" style={{ borderColor: T.border, color: T.ink, background: "#fff" }}>−</button>
+    <div className="flex items-center gap-2">
+      <button onClick={() => onChange(clamp(value - step))} className="w-9 h-9 shrink-0 rounded-xl border font-d font-bold text-lg cursor-pointer" style={{ borderColor: T.border, color: T.ink, background: "#fff" }}>−</button>
       <input
         type="number"
         value={value}
         min={min}
         max={max}
         onChange={(e) => onChange(clamp(parseInt(e.target.value) || min))}
-        className="font-d font-bold text-center w-20 rounded-xl border px-2 py-2.5 text-lg"
+        className="font-d font-bold text-center flex-1 min-w-0 rounded-xl border px-2 py-2 text-base"
         style={{ borderColor: T.border, color: T.ink }}
       />
-      <button onClick={() => onChange(clamp(value + step))} className="w-10 h-10 rounded-xl border font-d font-bold text-lg cursor-pointer" style={{ borderColor: T.border, color: T.ink, background: "#fff" }}>+</button>
-      <span className="font-b text-sm" style={{ color: T.gray }}>{unit}</span>
+      <button onClick={() => onChange(clamp(value + step))} className="w-9 h-9 shrink-0 rounded-xl border font-d font-bold text-lg cursor-pointer" style={{ borderColor: T.border, color: T.ink, background: "#fff" }}>+</button>
+      {unit && <span className="font-b text-sm shrink-0" style={{ color: T.gray }}>{unit}</span>}
     </div>
   );
 }
@@ -458,7 +465,7 @@ function Slider({ value, min, max, step, onChange, display }: { value: number; m
 
 function Pills<V extends string>({ options, value, onChange }: { options: { id: V; label: string }[]; value: V; onChange: (v: V) => void }) {
   return (
-    <div className="flex flex-wrap gap-2 mt-4">
+    <div className="flex flex-wrap gap-2">
       {options.map((o) => (
         <button
           key={o.id}
