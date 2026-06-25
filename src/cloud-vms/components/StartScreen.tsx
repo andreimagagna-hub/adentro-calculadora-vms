@@ -59,6 +59,7 @@ export function StartScreen({ onStart, onHome }: StartScreenProps) {
     nome: "",
     sobrenome: "",
     empresa: "",
+    email: "",
     whatsapp: "",
     cargo: "",
     funcionarios: "",
@@ -74,8 +75,13 @@ export function StartScreen({ onStart, onHome }: StartScreenProps) {
   useEmbeddedContact((c) => setLead((p) => mergeContact(p, c)));
 
   const set = (k: keyof Lead) => (v: string) => setLead((p) => ({ ...p, [k]: v }));
+  const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((lead.email ?? "").trim());
   const step1Ready = Boolean(
-    lead.nome?.trim() && lead.sobrenome?.trim() && lead.empresa?.trim() && lead.whatsapp?.trim(),
+    lead.nome?.trim() &&
+      lead.sobrenome?.trim() &&
+      lead.empresa?.trim() &&
+      emailValido &&
+      lead.whatsapp?.trim(),
   );
   const step2Ready = Boolean(lead.cargo && lead.funcionarios && lead.cotando && lead.previsao);
 
@@ -163,6 +169,14 @@ export function StartScreen({ onStart, onHome }: StartScreenProps) {
                     <Input label="Sobrenome" value={lead.sobrenome ?? ""} onChange={set("sobrenome")} placeholder="Seu sobrenome" autoComplete="family-name" />
                   </div>
                   <Input label="Empresa" value={lead.empresa ?? ""} onChange={set("empresa")} placeholder="Nome da empresa" autoComplete="organization" />
+                  <Input
+                    label="E-mail"
+                    value={lead.email ?? ""}
+                    onChange={(v) => set("email")(v.trim())}
+                    placeholder="voce@empresa.com.br"
+                    inputMode="email"
+                    autoComplete="email"
+                  />
                   <Input
                     label="Telefone"
                     value={lead.whatsapp ?? ""}
