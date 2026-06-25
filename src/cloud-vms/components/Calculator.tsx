@@ -115,22 +115,19 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
         </div>
       </header>
 
-      <main className="flex-1 max-w-6xl w-full mx-auto px-5 py-8 md:py-12">
+      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-5 py-4 md:py-6">
         <div className="fade-up">
-          <span className="font-ui font-semibold text-xs tracking-[.22em] uppercase" style={{ color: T.orange }}>
-            Dimensionamento técnico
-          </span>
-          <h1 className="font-d font-semibold mt-2" style={{ color: T.ink, fontSize: "clamp(1.5rem,2.6vw,2rem)", letterSpacing: "-.01em" }}>
+          <h1 className="font-d font-semibold" style={{ color: T.ink, fontSize: "clamp(1.25rem,2.2vw,1.6rem)", letterSpacing: "-.01em" }}>
             Configure seu projeto de VMS
           </h1>
-          <p className="font-b mt-2 text-sm" style={{ color: T.gray }}>
+          <p className="font-b mt-1 text-sm" style={{ color: T.gray }}>
             Olá{lead.nome ? `, ${lead.nome.split(" ")[0]}` : ""} — ajuste os parâmetros e veja o dimensionamento em tempo real.
           </p>
         </div>
 
-        <div className="mt-6 grid lg:grid-cols-[1.25fr_1fr] gap-6 items-start">
+        <div className="mt-4 grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-4 lg:gap-5 items-start">
           {/* ── PAINEL DE CONFIGURAÇÃO (compacto: 3 blocos) ── */}
-          <div className="space-y-4">
+          <div className="space-y-3 min-w-0">
             {/* 1 · VMS */}
             <Card>
               <SectionTitle n={1} icon={IconShield}>Qual VMS você utiliza?</SectionTitle>
@@ -141,7 +138,7 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
                     <button
                       key={v.id}
                       onClick={() => set("vms", v.id)}
-                      className="relative rounded-xl border px-2 py-2.5 text-center cursor-pointer transition"
+                      className="relative rounded-xl border px-2 py-2 text-center cursor-pointer transition"
                       style={{
                         borderColor: active ? T.orange : T.border,
                         background: active ? T.tint : "#fff",
@@ -171,7 +168,7 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
             <Card>
               <SectionTitle n={2} icon={IconCamera}>Câmeras e qualidade de imagem</SectionTitle>
 
-              <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3 mt-3">
                 <Field label="Quantidade de câmeras">
                   <Counter value={input.cameras} onChange={(v) => set("cameras", Math.max(1, v))} step={10} min={1} />
                 </Field>
@@ -180,7 +177,7 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
                 </Field>
               </div>
 
-              <Field label="Resolução média" className="mt-4">
+              <Field label="Resolução média" className="mt-3">
                 <div className="flex flex-wrap gap-2">
                   {RESOLUTIONS.map((o) => (
                     <button
@@ -207,7 +204,7 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
                 )}
               </Field>
 
-              <div className="grid sm:grid-cols-2 gap-x-6 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3 mt-3">
                 <Field label="Frames por segundo (FPS)">
                   <Counter value={input.fps} onChange={(v) => set("fps", v)} step={1} min={3} max={30} />
                 </Field>
@@ -221,7 +218,7 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
             <Card>
               <SectionTitle n={3} icon={IconVideo}>Gravação e acesso</SectionTitle>
 
-              <Field label="Tipo de gravação" className="mt-4">
+              <Field label="Tipo de gravação" className="mt-3">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {REC_TYPES.map((r) => {
                     const active = input.recType === r.id;
@@ -229,7 +226,7 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
                       <button
                         key={r.id}
                         onClick={() => set("recType", r.id)}
-                        className="rounded-xl border px-2 py-2.5 flex flex-col items-center gap-1.5 cursor-pointer transition"
+                        className="rounded-xl border px-2 py-2 flex flex-col items-center gap-1 cursor-pointer transition"
                         style={{
                           borderColor: active ? T.orange : T.border,
                           background: active ? T.tint : "#fff",
@@ -257,16 +254,16 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
                 )}
               </Field>
 
-              <Field label="Visualização simultânea (usuários)" className="mt-4">
+              <Field label="Visualização simultânea (usuários)" className="mt-3">
                 <Counter value={input.viewers} onChange={(v) => set("viewers", Math.max(0, v))} step={1} min={0} />
               </Field>
             </Card>
           </div>
 
           {/* ── PAINEL DE RESULTADO (fixo, com preço sempre visível) ── */}
-          <div className="lg:sticky lg:top-24">
+          <div className="lg:sticky lg:top-20 min-w-0">
             <div
-              className="rounded-3xl overflow-hidden border bg-white flex flex-col lg:max-h-[calc(100vh-7rem)]"
+              className="rounded-3xl overflow-hidden border bg-white flex flex-col lg:max-h-[calc(100vh-6rem)]"
               style={{ borderColor: T.border, boxShadow: "0 24px 64px rgba(4,12,82,.1)" }}
             >
               {/* topo escuro — sempre visível */}
@@ -423,7 +420,7 @@ function SectionTitle({ n, icon: Icon, children }: { n: number; icon: IconCompon
 function Field({ label, children, className = "" }: { label: string; children: React.ReactNode; className?: string }) {
   return (
     <div className={className}>
-      <div className="font-b text-xs font-semibold mb-2" style={{ color: T.gray }}>{label}</div>
+      <div className="font-b text-xs font-semibold mb-1.5" style={{ color: T.gray }}>{label}</div>
       {children}
     </div>
   );
