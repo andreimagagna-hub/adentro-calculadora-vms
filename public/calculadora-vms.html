@@ -1947,10 +1947,13 @@ window.selectPill = function(el, groupId, val) {
   // CSS: mostra apenas a calculadora.
   var css = document.createElement('style');
   css.textContent =
-    'body.calc-only .nav,body.calc-only .hero,body.calc-only .howcalc,' +
+    'body.calc-only .hero,body.calc-only .howcalc,' +
     'body.calc-only .why-vms,body.calc-only .compare-section,' +
     'body.calc-only .certs-section,body.calc-only .form-section-cta,' +
     'body.calc-only .footer{display:none!important}' +
+    // header enxuto: mantem so a logo da Adentro (esconde menu/CTA da nav).
+    'body.calc-only .nav-links,body.calc-only .nav-cta,' +
+    'body.calc-only .nav-hamburger{display:none!important}' +
     'body.calc-only .calc-section{padding-top:28px}' +
     '.calc-done-overlay{position:fixed;inset:0;z-index:9999;display:flex;' +
     'align-items:center;justify-content:center;padding:24px;' +
