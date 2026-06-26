@@ -29,6 +29,8 @@ export interface Lead {
   utm_campaign?: string;
   utm_content?: string;
   utm_term?: string;
+  utm_creative_format?: string;
+  utm_marketing_tactic?: string;
   gclid?: string;
 }
 
@@ -61,6 +63,8 @@ export function buildPayload(lead: Lead, input: CalcInput, result?: CalcResult) 
       utm_campaign: lead.utm_campaign ?? null,
       utm_content: lead.utm_content ?? null,
       utm_term: lead.utm_term ?? null,
+      utm_creative_format: lead.utm_creative_format ?? null,
+      utm_marketing_tactic: lead.utm_marketing_tactic ?? null,
       gclid: lead.gclid ?? null,
     },
     config: {
@@ -128,6 +132,8 @@ export async function saveVmsLeadOnly(lead: Lead): Promise<SaveResult> {
           utm_campaign: lead.utm_campaign ?? null,
           utm_content: lead.utm_content ?? null,
           utm_term: lead.utm_term ?? null,
+          utm_creative_format: lead.utm_creative_format ?? null,
+          utm_marketing_tactic: lead.utm_marketing_tactic ?? null,
           gclid: lead.gclid ?? null,
         },
       },

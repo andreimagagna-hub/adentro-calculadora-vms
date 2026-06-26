@@ -36,6 +36,8 @@ create table if not exists public.cloud_vms_leads (
   utm_campaign text,
   utm_content  text,
   utm_term     text,
+  utm_creative_format  text,
+  utm_marketing_tactic text,
   gclid        text
 );
 
@@ -52,6 +54,8 @@ alter table public.cloud_vms_leads add column if not exists utm_medium   text;
 alter table public.cloud_vms_leads add column if not exists utm_campaign text;
 alter table public.cloud_vms_leads add column if not exists utm_content  text;
 alter table public.cloud_vms_leads add column if not exists utm_term     text;
+alter table public.cloud_vms_leads add column if not exists utm_creative_format text;
+alter table public.cloud_vms_leads add column if not exists utm_marketing_tactic text;
 alter table public.cloud_vms_leads add column if not exists gclid        text;
 
 -- ────────────────────────────────────────────────────────────────────
@@ -141,6 +145,8 @@ begin
       utm_campaign = coalesce(v_lead->>'utm_campaign', utm_campaign),
       utm_content = coalesce(v_lead->>'utm_content', utm_content),
       utm_term = coalesce(v_lead->>'utm_term', utm_term),
+      utm_creative_format = coalesce(v_lead->>'utm_creative_format', utm_creative_format),
+      utm_marketing_tactic = coalesce(v_lead->>'utm_marketing_tactic', utm_marketing_tactic),
       gclid = coalesce(v_lead->>'gclid', gclid),
       updated_at = now()
     where id = v_in_id
@@ -151,13 +157,15 @@ begin
     insert into public.cloud_vms_leads
       (nome, sobrenome, empresa, email, whatsapp, perfil,
        origem, indicacao, cargo, funcionarios, cotando, previsao,
-       utm_source, utm_medium, utm_campaign, utm_content, utm_term, gclid)
+       utm_source, utm_medium, utm_campaign, utm_content, utm_term,
+       utm_creative_format, utm_marketing_tactic, gclid)
     values (v_lead->>'nome', v_lead->>'sobrenome', v_lead->>'empresa', v_email,
             v_lead->>'whatsapp', v_lead->>'perfil',
             v_lead->>'origem', v_lead->>'indicacao', v_lead->>'cargo',
             v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao',
             v_lead->>'utm_source', v_lead->>'utm_medium', v_lead->>'utm_campaign',
-            v_lead->>'utm_content', v_lead->>'utm_term', v_lead->>'gclid')
+            v_lead->>'utm_content', v_lead->>'utm_term',
+            v_lead->>'utm_creative_format', v_lead->>'utm_marketing_tactic', v_lead->>'gclid')
     on conflict (email) do update
       set nome = excluded.nome, sobrenome = excluded.sobrenome,
           empresa = excluded.empresa,
@@ -173,6 +181,8 @@ begin
           utm_campaign = coalesce(excluded.utm_campaign, cloud_vms_leads.utm_campaign),
           utm_content  = coalesce(excluded.utm_content,  cloud_vms_leads.utm_content),
           utm_term     = coalesce(excluded.utm_term,     cloud_vms_leads.utm_term),
+          utm_creative_format  = coalesce(excluded.utm_creative_format,  cloud_vms_leads.utm_creative_format),
+          utm_marketing_tactic = coalesce(excluded.utm_marketing_tactic, cloud_vms_leads.utm_marketing_tactic),
           gclid        = coalesce(excluded.gclid,        cloud_vms_leads.gclid),
           updated_at = now()
     returning id into v_lead_id;
@@ -182,13 +192,15 @@ begin
     insert into public.cloud_vms_leads
       (nome, sobrenome, empresa, email, whatsapp, perfil,
        origem, indicacao, cargo, funcionarios, cotando, previsao,
-       utm_source, utm_medium, utm_campaign, utm_content, utm_term, gclid)
+       utm_source, utm_medium, utm_campaign, utm_content, utm_term,
+       utm_creative_format, utm_marketing_tactic, gclid)
     values (v_lead->>'nome', v_lead->>'sobrenome', v_lead->>'empresa', v_email,
             v_lead->>'whatsapp', v_lead->>'perfil',
             v_lead->>'origem', v_lead->>'indicacao', v_lead->>'cargo',
             v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao',
             v_lead->>'utm_source', v_lead->>'utm_medium', v_lead->>'utm_campaign',
-            v_lead->>'utm_content', v_lead->>'utm_term', v_lead->>'gclid')
+            v_lead->>'utm_content', v_lead->>'utm_term',
+            v_lead->>'utm_creative_format', v_lead->>'utm_marketing_tactic', v_lead->>'gclid')
     returning id into v_lead_id;
   end if;
 
@@ -251,13 +263,15 @@ begin
     insert into public.cloud_vms_leads
       (nome, sobrenome, empresa, email, whatsapp, perfil,
        origem, indicacao, cargo, funcionarios, cotando, previsao,
-       utm_source, utm_medium, utm_campaign, utm_content, utm_term, gclid)
+       utm_source, utm_medium, utm_campaign, utm_content, utm_term,
+       utm_creative_format, utm_marketing_tactic, gclid)
     values (v_lead->>'nome', v_lead->>'sobrenome', v_lead->>'empresa', v_email,
             v_lead->>'whatsapp', v_lead->>'perfil',
             v_lead->>'origem', v_lead->>'indicacao', v_lead->>'cargo',
             v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao',
             v_lead->>'utm_source', v_lead->>'utm_medium', v_lead->>'utm_campaign',
-            v_lead->>'utm_content', v_lead->>'utm_term', v_lead->>'gclid')
+            v_lead->>'utm_content', v_lead->>'utm_term',
+            v_lead->>'utm_creative_format', v_lead->>'utm_marketing_tactic', v_lead->>'gclid')
     on conflict (email) do update
       set nome = excluded.nome, sobrenome = excluded.sobrenome,
           empresa = excluded.empresa,
@@ -273,6 +287,8 @@ begin
           utm_campaign = coalesce(excluded.utm_campaign, cloud_vms_leads.utm_campaign),
           utm_content  = coalesce(excluded.utm_content,  cloud_vms_leads.utm_content),
           utm_term     = coalesce(excluded.utm_term,     cloud_vms_leads.utm_term),
+          utm_creative_format  = coalesce(excluded.utm_creative_format,  cloud_vms_leads.utm_creative_format),
+          utm_marketing_tactic = coalesce(excluded.utm_marketing_tactic, cloud_vms_leads.utm_marketing_tactic),
           gclid        = coalesce(excluded.gclid,        cloud_vms_leads.gclid),
           updated_at = now()
     returning id into v_lead_id;
@@ -280,13 +296,15 @@ begin
     insert into public.cloud_vms_leads
       (nome, sobrenome, empresa, email, whatsapp, perfil,
        origem, indicacao, cargo, funcionarios, cotando, previsao,
-       utm_source, utm_medium, utm_campaign, utm_content, utm_term, gclid)
+       utm_source, utm_medium, utm_campaign, utm_content, utm_term,
+       utm_creative_format, utm_marketing_tactic, gclid)
     values (v_lead->>'nome', v_lead->>'sobrenome', v_lead->>'empresa', null,
             v_lead->>'whatsapp', v_lead->>'perfil',
             v_lead->>'origem', v_lead->>'indicacao', v_lead->>'cargo',
             v_lead->>'funcionarios', v_lead->>'cotando', v_lead->>'previsao',
             v_lead->>'utm_source', v_lead->>'utm_medium', v_lead->>'utm_campaign',
-            v_lead->>'utm_content', v_lead->>'utm_term', v_lead->>'gclid')
+            v_lead->>'utm_content', v_lead->>'utm_term',
+            v_lead->>'utm_creative_format', v_lead->>'utm_marketing_tactic', v_lead->>'gclid')
     returning id into v_lead_id;
   end if;
 

@@ -254,7 +254,7 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
                 )}
               </Field>
 
-              <Field label="Visualização simultânea (usuários)" className="mt-3">
+              <Field label="Visualização de câmeras" className="mt-3">
                 <Counter value={input.viewers} onChange={(v) => set("viewers", Math.max(0, v))} step={1} min={0} />
               </Field>
             </Card>
@@ -305,7 +305,7 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
                 <Metric icon={IconDatabase} color={T.blue} label="Consumo mensal" value={`${fmtGB(result.consumoMensalGB)}/mês`} />
                 <Metric icon={IconTrendUp} color={T.amber} label="Crescimento anual" value={`${fmtNum(result.growthTB)} TB/ano`} />
                 {input.viewers > 0 && (
-                  <Metric icon={IconEye} color={T.green} label={`Visualização (${input.viewers} usuários)`} value={`${fmtR(result.custoVisualizacao)}/mês`} highlight />
+                  <Metric icon={IconEye} color={T.green} label={`Visualização (${input.viewers} câmeras)`} value={`${fmtR(result.custoVisualizacao)}/mês`} highlight />
                 )}
                 <p className="font-b text-[11px] pt-1" style={{ color: T.gray, lineHeight: 1.5 }}>
                   Estimativa técnica e comercial. O projeto final é validado por um especialista da Adentro conforme ambiente, VMS, retenção e disponibilidade.
@@ -318,7 +318,7 @@ export function Calculator({ lead, onHome, onBack }: CalculatorProps) {
                   onClick={() => setShowProposal(true)}
                   className="btn-p text-white border-0 w-full rounded-xl px-5 py-3.5 font-ui font-semibold text-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  Quero proteger meu projeto
+                  Falar com o time comercial
                 </button>
               </div>
             </div>

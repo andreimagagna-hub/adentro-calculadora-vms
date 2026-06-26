@@ -58,6 +58,8 @@ export const TRACKING_KEYS = [
   "utm_campaign",
   "utm_content",
   "utm_term",
+  "utm_creative_format",
+  "utm_marketing_tactic",
   "gclid",
 ] as const;
 

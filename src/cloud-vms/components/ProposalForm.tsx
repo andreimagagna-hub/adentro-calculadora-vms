@@ -61,9 +61,9 @@ export function ProposalForm({ lead, input, result, onClose }: ProposalFormProps
           </div>
         ) : (
           <>
-            <h2 className="font-d font-bold text-xl md:text-2xl" style={{ color: T.ink }}>Quero proteger meu projeto</h2>
+            <h2 className="font-d font-bold text-xl md:text-2xl" style={{ color: T.ink }}>Falar com o time comercial</h2>
             <p className="font-b text-sm mt-1.5" style={{ color: T.gray }}>
-              Confirme o envio do seu dimensionamento. Um especialista valida e prepara a proposta final.
+              Confirme o envio do seu dimensionamento. O time comercial valida e prepara a proposta final.
             </p>
 
             {/* contato (vindo do site) — só aparece quando existe */}
