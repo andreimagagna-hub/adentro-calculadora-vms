@@ -16,6 +16,7 @@ const VMS_STANDALONE =
    contato já coletado no gate (pré-preenchimento) e tracking de campanha. */
 function buildCalcQuery(lead: Lead): string {
   const p = new URLSearchParams();
+  p.set("calc", "1"); // modo só-calculadora (esconde a landing do HTML)
   if (lead.id) p.set("lead_id", lead.id);
   const pass: (keyof Lead)[] = ["nome", "sobrenome", "empresa", "email", "whatsapp"];
   for (const k of pass) {

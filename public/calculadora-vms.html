@@ -1933,6 +1933,118 @@ window.selectPill = function(el, groupId, val) {
   }
   _origSelectPill2(el, groupId, val);
 };
+
+// ════════════════════════════════════════════════════════════
+// MODO SÓ-CALCULADORA (?calc=1) — usado no iframe apos o cadastro/gate.
+// Esconde a landing inteira (nav, hero, beneficios, cases, seguranca, form,
+// footer) e deixa SO a calculadora. O CTA de resultado salva o dimensionamento
+// direto no Supabase, correlacionado ao lead ja criado no gate (?lead_id=).
+// ════════════════════════════════════════════════════════════
+(function () {
+  var qp = new URLSearchParams(location.search);
+  if (qp.get('calc') !== '1') return;
+
+  // CSS: mostra apenas a calculadora.
+  var css = document.createElement('style');
+  css.textContent =
+    'body.calc-only .nav,body.calc-only .hero,body.calc-only .howcalc,' +
+    'body.calc-only .why-vms,body.calc-only .compare-section,' +
+    'body.calc-only .certs-section,body.calc-only .form-section-cta,' +
+    'body.calc-only .footer{display:none!important}' +
+    'body.calc-only .calc-section{padding-top:28px}' +
+    '.calc-done-overlay{position:fixed;inset:0;z-index:9999;display:flex;' +
+    'align-items:center;justify-content:center;padding:24px;' +
+    'background:rgba(4,12,82,.55);backdrop-filter:blur(4px)}' +
+    '.calc-done-card{background:#fff;border-radius:18px;max-width:420px;width:100%;' +
+    'padding:36px 28px;text-align:center;box-shadow:0 24px 64px rgba(4,12,82,.25)}';
+  document.head.appendChild(css);
+  document.body.classList.add('calc-only');
+
+  function showDone() {
+    var ov = document.createElement('div');
+    ov.className = 'calc-done-overlay';
+    ov.innerHTML =
+      '<div class="calc-done-card">' +
+      '<div style="width:56px;height:56px;border-radius:50%;margin:0 auto 16px;' +
+      'background:var(--green-bg);display:flex;align-items:center;justify-content:center;' +
+      'color:var(--green);font-size:28px">&#10003;</div>' +
+      '<div style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:8px">' +
+      'Projeto enviado!</div>' +
+      '<div style="font-size:14px;color:var(--gray);line-height:1.5">' +
+      'Recebemos o seu dimensionamento. Um especialista da Adentro vai te chamar ' +
+      'em breve com a proposta.</div></div>';
+    document.body.appendChild(ov);
+  }
+
+  async function submitFromCalc(ev) {
+    if (ev) ev.preventDefault();
+    var p = new URLSearchParams(location.search);
+    var qv = function (k) { return p.get(k) || null; };
+    var c = window.__calc || {};
+    var n = function (v) { return (typeof v === 'number' && isFinite(v)) ? v : 0; };
+
+    var cameras = Math.max(1, parseInt(document.getElementById('numCameras').value) || 1);
+    var viewers = Math.max(0, parseInt(document.getElementById('numViewers').value) || 0);
+    var fps = parseInt(document.getElementById('fps').value) || 15;
+
+    var payload = {
+      lead: {
+        id: qv('lead_id'),
+        nome: qv('nome'),
+        sobrenome: qv('sobrenome'),
+        empresa: qv('empresa'),
+        email: qv('email'),
+        whatsapp: qv('whatsapp'),
+        perfil: null,
+        origem: 'calculadora-vms',
+        indicacao: qv('vendedor') || qv('indicacao'),
+        cargo: null, funcionarios: null, cotando: null, previsao: null,
+        utm_source: qv('utm_source'), utm_medium: qv('utm_medium'),
+        utm_campaign: qv('utm_campaign'), utm_content: qv('utm_content'),
+        utm_term: qv('utm_term'), utm_creative_format: qv('utm_creative_format'),
+        utm_marketing_tactic: qv('utm_marketing_tactic'), gclid: qv('gclid'),
+      },
+      config: {
+        vms: currentVMS, cameras: cameras, viewers: viewers,
+        resolution: currentResolution, codec: currentCodec, fps: fps,
+        retention: currentRetention, rec_type: currentRecType, movement: currentMovement,
+      },
+      result: {
+        os: c.os || currentOS,
+        storage_util_gb: +n(c.storageUtilGB).toFixed(2),
+        storage_servidor_gb: Math.round(n(c.storageServidorGB)),
+        link_min_mbps: Math.ceil(n(c.linkMinMbps)),
+        link_ideal_mbps: Math.ceil(n(c.linkIdealMbps)),
+        num_servers: n(c.numServers),
+        consumo_mensal_gb: +n(c.consumoMensalGB).toFixed(2),
+        growth_tb: +n(c.growthTB).toFixed(2),
+        custo_por_camera: Math.round(n(c.custoPorCamera)),
+        custo_visualizacao: Math.round(n(c.custoVisualizacao)),
+        custo_total: Math.round(n(c.custoTotal)),
+        plan_name: c.planName || document.getElementById('r-plan-name').textContent,
+      },
+      meta: { user_agent: navigator.userAgent, completed_at: new Date().toISOString() },
+    };
+
+    var btns = document.querySelectorAll('.result-btn-primary,.result-btn-ghost');
+    btns.forEach(function (b) { b.disabled = true; });
+    try {
+      await saveLeadSupabase(payload);
+    } catch (err) {
+      console.error('Erro ao salvar dimensionamento:', err);
+    } finally {
+      btns.forEach(function (b) { b.disabled = false; });
+    }
+    showDone();
+  }
+
+  // Religa os CTAs da calculadora p/ salvar direto (sem rolar p/ o form oculto).
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.result-btn-primary,.result-btn-ghost').forEach(function (b) {
+      b.onclick = submitFromCalc;
+    });
+  });
+})();
 </script>
 </body>
 </html>
