@@ -192,6 +192,26 @@
 .res-grid button{font-size:13px;font-weight:500;border:1.5px solid var(--lgray);background:var(--off);color:var(--dark);border-radius:8px;padding:10px 12px;text-align:left;cursor:pointer}
 .res-grid button.on{border-color:var(--orange);background:var(--orange-l);color:var(--orange-d)}
 
+/* Modal de proposta */
+.pf-title{font-size:20px;font-weight:800;color:var(--navy);letter-spacing:-.3px}
+.pf-sub{font-size:13px;color:var(--gray);margin:6px 0 18px;line-height:1.5}
+.pf-box{border:1px solid var(--lgray);background:var(--off);border-radius:14px;padding:14px 16px;margin-bottom:12px;display:flex;flex-direction:column;gap:8px}
+.pf-box.accent{background:var(--orange-l);border-color:rgba(235,115,66,.3)}
+.pf-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px}
+.pf-row .lbl{color:var(--gray)}
+.pf-row .val{font-weight:700;color:var(--navy);text-align:right}
+.pf-row .val.orange{color:var(--orange)}
+.pf-send{width:100%;margin-top:18px;background:linear-gradient(135deg,var(--orange),#EB7342);color:#fff;border:0;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 18px rgba(235,115,66,.35)}
+.pf-send:hover{background:linear-gradient(135deg,#ED501D,var(--orange))}
+.pf-send:disabled{opacity:.6;cursor:default}
+.pf-back{width:100%;margin-top:10px;background:transparent;border:0;color:var(--gray);font-size:13px;font-weight:600;cursor:pointer}
+.pf-secure{display:flex;align-items:center;justify-content:center;gap:6px;font-size:11px;color:#9CA3AF;margin-top:12px}
+.pf-error{margin-top:14px;border-radius:10px;padding:10px 14px;font-size:12px;background:#FCEBEB;color:#B42318;border:1px solid #F2B8B5}
+.pf-success{text-align:center;padding:8px 0}
+.pf-success-ico{width:64px;height:64px;border-radius:18px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.pf-success h2{font-size:22px;font-weight:800;color:var(--navy)}
+.pf-success p{font-size:14px;color:var(--gray);margin-top:8px;line-height:1.6}
+
 /* Responsivo */
 @media(max-width:1024px){
   .calc-grid{grid-template-columns:1fr;gap:24px}
