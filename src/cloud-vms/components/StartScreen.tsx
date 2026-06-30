@@ -13,7 +13,7 @@ import {
   type IconComponent,
 } from "./icons";
 import { useEmbeddedContact, mergeContact, readTrackingFromUrl, TRACKING_KEYS } from "../../lib/embed";
-import type { Lead } from "../lib/api";
+import { findLeadByEmail, type Lead } from "../lib/api";
 
 interface StartScreenProps {
   onStart: (lead: Lead) => void;
@@ -67,6 +67,10 @@ export function StartScreen({ onStart }: StartScreenProps) {
     previsao: "",
   });
   const [step, setStep] = useState<1 | 2>(1);
+  const [loginMode, setLoginMode] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [loginError, setLoginError] = useState<string | null>(null);
   useEffect(() => {
     document.title = "Calculadora de VMS na Nuvem — Adentro Tecnologia";
     // captura tracking de campanha (UTMs + gclid) da URL → campos ocultos
@@ -87,6 +91,20 @@ export function StartScreen({ onStart }: StartScreenProps) {
       lead.whatsapp?.trim(),
   );
   const step2Ready = Boolean(lead.cargo && lead.funcionarios && lead.cotando && lead.previsao);
+  const loginEmailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginEmail.trim());
+
+  const handleLogin = async () => {
+    if (!loginEmailValido) return;
+    setLoginLoading(true);
+    setLoginError(null);
+    const result = await findLeadByEmail(loginEmail);
+    setLoginLoading(false);
+    if (result.ok) {
+      onStart(result.lead);
+    } else {
+      setLoginError("E-mail não encontrado. Faça seu cadastro para acessar a calculadora.");
+    }
+  };
 
   const goNext = () => {
     setStep(2);
@@ -140,6 +158,36 @@ export function StartScreen({ onStart }: StartScreenProps) {
         {/* Lado direito — wizard (2 etapas) */}
         <div className="fade-up" style={{ animationDelay: ".1s" }}>
           <div className="rounded-3xl border bg-white p-7 md:p-9" style={{ borderColor: T.border, boxShadow: "0 24px 64px rgba(4,12,82,.08)" }}>
+            {loginMode ? (
+              /* ── LOGIN POR E-MAIL ── */
+              <div className="fade-up">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: T.tint }}>
+                    <IconArrowRight size={18} color={T.orange} />
+                  </span>
+                  <div>
+                    <h2 className="font-d font-semibold text-xl md:text-2xl" style={{ color: T.ink }}>Acesso rápido</h2>
+                    <p className="font-b text-sm mt-0.5" style={{ color: T.gray }}>Entre com o e-mail que você já cadastrou.</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <Input label="E-mail cadastrado" value={loginEmail} onChange={(v) => { setLoginEmail(v.trim()); setLoginError(null); }} placeholder="voce@empresa.com.br" inputMode="email" autoComplete="email" />
+                  {loginError && (
+                    <div className="rounded-xl px-4 py-3 font-b text-xs flex items-center gap-2" style={{ background: "#FCEBEB", color: "#B42318", border: "1px solid #F2B8B5" }}>{loginError}</div>
+                  )}
+                </div>
+                <div className="mt-7">
+                  <Btn icon={IconArrowRight} className={`w-full justify-center ${loginEmailValido && !loginLoading ? "" : "opacity-50 pointer-events-none"}`} onClick={handleLogin}>
+                    {loginLoading ? "Buscando…" : "Acessar calculadora"}
+                  </Btn>
+                </div>
+                <div className="mt-5 text-center">
+                  <button type="button" onClick={() => { setLoginMode(false); setLoginError(null); }} className="font-b text-sm cursor-pointer bg-transparent border-0 underline" style={{ color: T.gray }}>← Voltar ao cadastro</button>
+                </div>
+              </div>
+            ) : (
+              /* ── CADASTRO ORIGINAL (2 etapas) ── */
+              <>
             <Stepper step={step} />
 
             {step === 1 ? (
@@ -191,6 +239,13 @@ export function StartScreen({ onStart }: StartScreenProps) {
                     <IconLock size={12} /> Seus dados ficam seguros e não são compartilhados.
                   </p>
                 </div>
+
+                {/* Link para login direto */}
+                <div className="mt-5 pt-5 border-t text-center" style={{ borderColor: T.border }}>
+                  <button type="button" onClick={() => setLoginMode(true)} className="font-b text-sm cursor-pointer bg-transparent border-0" style={{ color: T.orange }}>
+                    Já acessou antes? <span className="underline font-semibold">Entrar com seu e-mail</span>
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="fade-up">
@@ -241,6 +296,8 @@ export function StartScreen({ onStart }: StartScreenProps) {
                   </Btn>
                 </div>
               </div>
+            )}
+              </>
             )}
           </div>
         </div>

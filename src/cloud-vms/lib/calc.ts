@@ -309,6 +309,151 @@ export function calculate(input: CalcInput): CalcResult {
   };
 }
 
+/* ============================================================
+   MULTI-GRUPO — vários "Grupos de Câmeras" num mesmo orçamento.
+   Espelha o calcUpdate do HTML aprovado (public/calculadora-vms.html):
+   calcula bitrate/storage/link por grupo, soma os totais e roda o
+   modelo de custo UMA vez sobre os agregados. Sem viewers.
+   ============================================================ */
+
+/* ── ENTRADA POR GRUPO ── */
+export interface GroupInput {
+  id: string;
+  name: string;
+  cameras: number;
+  resolution: string; // chave de BITRATES
+  codec: string; // chave de CODEC_FACTORS
+  fps: number; // 5–24
+  retention: number; // dias
+  recType: RecType;
+  movement: number; // 0.10–1.00 (usado quando recType = motion)
+  recPct: number; // 0–1 (usado quando recType = commercial/custom)
+}
+
+let _gid = 0;
+export function makeGroup(partial: Partial<GroupInput> = {}): GroupInput {
+  _gid += 1;
+  const base: GroupInput = {
+    id: "",
+    name: `Grupo ${_gid}`,
+    cameras: 40,
+    resolution: "1080p",
+    codec: "h265",
+    fps: 15,
+    retention: 30,
+    recType: "continuous",
+    movement: 0.4,
+    recPct: 0.4,
+  };
+  // id sempre fresco por último — ignora qualquer id vindo em `partial`
+  // (ex.: ao clonar o último grupo em addProject), evitando ids duplicados.
+  return { ...base, ...partial, id: `g${Date.now().toString(36)}${_gid}` };
+}
+
+/* Fração do tempo gravando, por tipo de gravação (idêntico ao HTML). */
+function recFactorOf(g: GroupInput): number {
+  if (g.recType === "motion") return g.movement;
+  if (g.recType === "commercial") return g.recPct || 0.4;
+  if (g.recType === "custom") return g.recPct;
+  return 1.0; // continuous
+}
+
+export interface GroupMetrics {
+  cameras: number;
+  bitrateCamera: number; // Mbps, já com teto aplicado
+  storageDiaGB: number;
+  storageUtilGB: number;
+  linkUploadMbps: number;
+}
+
+/* Métricas de um grupo — com TETO de bitrate (8 Mbps p/ base <12, 12 p/ ≥12). */
+export function groupMetrics(g: GroupInput): GroupMetrics {
+  const cameras = Math.max(1, g.cameras || 1);
+  const fps = g.fps || 15;
+  const bitrateBase = BITRATES[g.resolution] || 8;
+  const fpsFactor = fps / 30;
+  const codecFactor = CODEC_FACTORS[g.codec] || 0.5;
+
+  let bitrateCamera = bitrateBase * fpsFactor * codecFactor;
+  const maxBitrate = bitrateBase >= 12 ? 12 : 8;
+  if (bitrateCamera > maxBitrate) bitrateCamera = maxBitrate;
+
+  const recFactor = recFactorOf(g);
+  const storageDiaGB = (bitrateCamera * recFactor * cameras * 86400) / 8 / 1024;
+  const storageUtilGB = storageDiaGB * (g.retention || 30);
+
+  return {
+    cameras,
+    bitrateCamera,
+    storageDiaGB,
+    storageUtilGB,
+    linkUploadMbps: bitrateCamera * cameras,
+  };
+}
+
+/* Resultado agregado de todos os grupos (mesmo modelo de custo do HTML). */
+export function calculateGroups(vms: string, groups: GroupInput[]): CalcResult {
+  const profile = VMS_PROFILES[vms] || VMS_PROFILES.outro;
+  const os = profile.os;
+
+  let totalCameras = 0;
+  let totalStorageUtilGB = 0;
+  let totalStorageDiaGB = 0;
+  let totalLinkUploadMbps = 0;
+
+  for (const g of groups) {
+    const m = groupMetrics(g);
+    totalCameras += m.cameras;
+    totalStorageUtilGB += m.storageUtilGB;
+    totalStorageDiaGB += m.storageDiaGB;
+    totalLinkUploadMbps += m.linkUploadMbps;
+  }
+
+  // ── STORAGE ──
+  const storageServidorGB = totalStorageUtilGB * 1.2 * profile.storageOverhead;
+  const storageServ500GB = roundUp500(storageServidorGB);
+  const storageParaCusto = storageServ500GB / 1024;
+
+  // ── LINK (bidirecional, sem viewers) ──
+  const linkGravMbps = totalLinkUploadMbps * profile.linkOverhead;
+  const linkMinMbps = linkGravMbps * 2;
+  const linkIdealMbps = linkMinMbps * 1.3;
+
+  // ── Servidores VMS (até 800 câmeras por VM) ──
+  const numServers = Math.max(1, Math.ceil(totalCameras / 800));
+
+  // ── CUSTO ──
+  const custoStorage = calcStorageCost(storageParaCusto);
+  const custoServidores = numServers * (os === "linux" ? CONFIG.custoServidorLinux : CONFIG.custoServidorWin);
+
+  let linkPrecoCont: number;
+  if (totalCameras > 5000) linkPrecoCont = 4.4;
+  else if (totalCameras > 1000) linkPrecoCont = 4.675;
+  else linkPrecoCont = CONFIG.linkPrecoContinuo;
+
+  const custoLinkGrav = Math.ceil(linkGravMbps) * linkPrecoCont;
+  const custoBase = (custoStorage + custoServidores + custoLinkGrav) * 1.25;
+  const custoPorCamera = totalCameras > 0 ? custoBase / totalCameras : 0;
+
+  const growthTB = storageParaCusto * CONFIG.crescimentoAnual;
+  const consumoMensalGB = totalStorageDiaGB * 30;
+
+  return {
+    os,
+    storageUtilGB: totalStorageUtilGB,
+    storageServidorGB: storageServ500GB,
+    linkMinMbps,
+    linkIdealMbps,
+    numServers,
+    consumoMensalGB,
+    growthTB,
+    custoPorCamera,
+    custoVisualizacao: 0,
+    custoTotal: custoBase,
+    planName: getPlanName(storageParaCusto),
+  };
+}
+
 /* ── FORMATADORES (pt-BR) ── */
 export const fmtR = (n: number) => "R$ " + Math.round(n).toLocaleString("pt-BR");
 // Custo por câmera: 2 casas decimais (idêntico ao fmtCam do calc.js de referência)

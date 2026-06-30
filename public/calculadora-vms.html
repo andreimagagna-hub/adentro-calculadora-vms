@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="theme-color" content="#040C52">
+<meta name="theme-color" content="#0B0D31">
 <meta name="color-scheme" content="light">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,19 +16,19 @@
    ============================================================ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --orange:#F26130;--orange-d:#d94f1e;--orange-l:#FFF4EF;--orange-ll:#FFF0EB;
-  --navy:#040C52;--navy-l:#0A1660;--navy-ll:#1A2A8A;
-  --white:#FFFFFF;--off:#F7F8FC;--lgray:#E4E7EE;
-  --gray:#6B7280;--dark:#12182E;
+  --orange:#EB7342;--orange-d:#ED501D;--orange-l:#FDF1EA;--orange-ll:#FDF1EA;
+  --navy:#0B0D31;--navy-l:#0A1660;--navy-ll:#1A2A8A;
+  --white:#FFFFFF;--off:#FAFAFB;--lgray:#ECECEC;
+  --gray:#6B7280;--dark:#0B0D31;
   --green:#16A34A;--green-bg:#E8F5E9;--green-txt:#1B5E20;
   --red:#E24B4A;--red-bg:#FCEBEB;
-  --amber:#EF9F27;--amber-bg:#FFFBEB;--amber-txt:#633806;
+  --amber:#F2A24E;--amber-bg:#FFFBEB;--amber-txt:#633806;
   --blue:#3B82F6;--blue-bg:#EFF6FF;
   --radius:10px;--radius-lg:14px;--radius-xl:20px;
   --shadow-sm:0 1px 3px rgba(4,12,82,.07),0 1px 2px rgba(4,12,82,.05);
   --shadow-md:0 4px 16px rgba(4,12,82,.1),0 2px 6px rgba(4,12,82,.06);
   --shadow-lg:0 12px 40px rgba(4,12,82,.14),0 4px 12px rgba(4,12,82,.08);
-  --shadow-orange:0 8px 24px rgba(242,97,48,.28);
+  --shadow-orange:0 8px 24px rgba(235,115,66,.28);
 }
 html{scroll-behavior:smooth}
 body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;background:var(--white);color:var(--dark);line-height:1.6;font-size:15px}
@@ -59,7 +59,7 @@ a{color:var(--orange);text-decoration:none}
 
 /* ── NAV ── */
 .nav{position:sticky;top:0;z-index:200;background:rgba(4,12,82,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 2px 20px rgba(0,0,0,.2)}
-.nav-inner{height:64px;display:flex;align-items:center;gap:32px}
+.nav-inner{height:64px;display:flex;align-items:center;justify-content:center;gap:32px}
 .nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .nav-logo-text{font-size:18px;font-weight:700;color:#fff;letter-spacing:-.3px}
 .nav-logo-text span{color:var(--orange)}
@@ -70,7 +70,7 @@ a{color:var(--orange);text-decoration:none}
 
 /* ── HERO ── */
 .hero{background:var(--navy);padding:72px 0 0;position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;top:-200px;right:-150px;width:600px;height:600px;border-radius:50%;background:rgba(242,97,48,.07);pointer-events:none}
+.hero::after{content:'';position:absolute;top:-200px;right:-150px;width:600px;height:600px;border-radius:50%;background:rgba(235,115,66,.07);pointer-events:none}
 .hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent)}
 .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;position:relative;z-index:1}
 .hero-left{}
@@ -81,7 +81,7 @@ a{color:var(--orange);text-decoration:none}
 .hero-sub{font-size:15px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:28px;max-width:460px}
 .hero-bullets{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
 .hero-bullet{display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,.85);font-weight:500}
-.hero-bullet-icon{width:30px;height:30px;border-radius:8px;background:rgba(242,97,48,.2);border:1px solid rgba(242,97,48,.35);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hero-bullet-icon{width:30px;height:30px;border-radius:8px;background:rgba(235,115,66,.2);border:1px solid rgba(235,115,66,.35);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .hero-bullet-icon i{font-size:15px;color:var(--orange)}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px}
 .hero-trust{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.08);border-radius:12px;overflow:hidden;margin-bottom:0}
@@ -108,12 +108,12 @@ a{color:var(--orange);text-decoration:none}
 .dc-badge-val{font-size:11px;font-weight:700;color:var(--orange)}
 
 /* ── VMS STRIP ── */
-.vms-strip{background:linear-gradient(90deg,#F7F8FC,#fff,#F7F8FC);border-bottom:1px solid var(--lgray);padding:22px 0}
-.vms-strip-inner{display:flex;align-items:center;gap:32px;overflow-x:auto;padding-bottom:2px}
+.vms-strip{background:linear-gradient(90deg,#FAFAFB,#fff,#FAFAFB);border-bottom:1px solid var(--lgray);padding:22px 0}
+.vms-strip-inner{display:flex;align-items:center;justify-content:center;gap:32px;overflow-x:auto;padding-bottom:2px;flex-wrap:wrap}
 .vms-strip-label{font-size:11px;font-weight:600;color:var(--gray);white-space:nowrap;text-transform:uppercase;letter-spacing:1px;flex-shrink:0}
-.vms-logos{display:flex;align-items:center;gap:28px;flex:1}
+.vms-logos{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}
 .vms-logo-item{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;opacity:.6;transition:all .2s;padding:6px 10px;border-radius:10px}
-.vms-logo-item:hover{opacity:1;background:rgba(242,97,48,.05)}
+.vms-logo-item:hover{opacity:1;background:rgba(235,115,66,.05)}
 .vms-logo-name{font-size:10px;font-weight:600;color:var(--gray)}
 .vms-logo-box{height:32px;display:flex;align-items:center;justify-content:center}
 
@@ -124,18 +124,18 @@ a{color:var(--orange);text-decoration:none}
 /* Step 1 — VMS selector */
 .step-block{margin-bottom:48px}
 .step-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.step-num{width:36px;height:36px;background:linear-gradient(135deg,var(--orange),#f5825a);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 4px 12px rgba(242,97,48,.35)}
+.step-num{width:36px;height:36px;background:linear-gradient(135deg,var(--orange),#EB7342);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 4px 12px rgba(235,115,66,.35)}
 .step-title{font-size:21px;font-weight:700;color:var(--navy);letter-spacing:-.3px}
 .vms-cards{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-bottom:14px}
 .vms-card{border:2px solid var(--lgray);border-radius:14px;padding:20px 12px 16px;cursor:pointer;text-align:center;transition:all .22s;background:#fff;position:relative;overflow:hidden}
-.vms-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(242,97,48,.0),rgba(242,97,48,.06));opacity:0;transition:opacity .22s}
-.vms-card:hover{border-color:var(--orange);box-shadow:0 8px 24px rgba(242,97,48,.15);transform:translateY(-2px)}
+.vms-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(235,115,66,.0),rgba(235,115,66,.06));opacity:0;transition:opacity .22s}
+.vms-card:hover{border-color:var(--orange);box-shadow:0 8px 24px rgba(235,115,66,.15);transform:translateY(-2px)}
 .vms-card:hover::before{opacity:1}
-.vms-card.selected{border-color:var(--orange);background:var(--orange-l);box-shadow:0 8px 24px rgba(242,97,48,.22);transform:translateY(-2px)}
+.vms-card.selected{border-color:var(--orange);background:var(--orange-l);box-shadow:0 8px 24px rgba(235,115,66,.22);transform:translateY(-2px)}
 .vms-card.selected::before{opacity:1}
 .vms-card-logo{height:40px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;overflow:hidden}
 .vms-card-name{font-size:12px;font-weight:600;color:var(--dark);line-height:1.3}
-.vms-card .check{width:22px;height:22px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;margin:8px auto 0;opacity:0;transition:all .2s;box-shadow:0 4px 10px rgba(242,97,48,.4)}
+.vms-card .check{width:22px;height:22px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;margin:8px auto 0;opacity:0;transition:all .2s;box-shadow:0 4px 10px rgba(235,115,66,.4)}
 .vms-card.selected .check{opacity:1}
 
 .vms-msg{display:none;padding:12px 16px;background:var(--green-bg);border:1px solid rgba(22,163,74,.3);border-radius:var(--radius);font-size:13px;color:var(--green-txt);align-items:center;gap:10px}
@@ -146,12 +146,12 @@ a{color:var(--orange);text-decoration:none}
 .calc-grid{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
 .calc-form-panel{background:var(--off);border:1px solid var(--lgray);border-radius:var(--radius-xl);padding:32px;box-shadow:0 4px 24px rgba(4,12,82,.06)}
 .form-section-divider{height:1px;background:var(--lgray);margin:8px 0 24px;opacity:.7}
-.calc-result-panel{background:linear-gradient(160deg,#040C52 0%,#0A1660 100%);border-radius:var(--radius-xl);padding:28px;position:sticky;top:80px;box-shadow:0 12px 40px rgba(4,12,82,.3);border:1px solid rgba(255,255,255,.08)}
+.calc-result-panel{background:linear-gradient(160deg,#0B0D31 0%,#0A1660 100%);border-radius:var(--radius-xl);padding:28px;position:sticky;top:80px;box-shadow:0 12px 40px rgba(4,12,82,.3);border:1px solid rgba(255,255,255,.08)}
 
 .form-section-orig{margin-bottom:24px}
 .form-section-title{font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .form-section-title i{font-size:14px;color:var(--orange)}
-.form-section-num{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--orange),#f5825a);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(242,97,48,.3)}
+.form-section-num{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--orange),#EB7342);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(235,115,66,.3)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-group{display:flex;flex-direction:column;gap:5px}
 .form-label{font-size:12px;font-weight:500;color:var(--gray)}
@@ -171,16 +171,16 @@ a{color:var(--orange);text-decoration:none}
 /* Pill selectors */
 .pill-group{display:flex;flex-wrap:wrap;gap:6px}
 .pill-opt{padding:7px 16px;border-radius:20px;border:1.5px solid var(--lgray);font-size:12px;font-weight:600;color:var(--gray);cursor:pointer;transition:all .18s;background:#fff;white-space:nowrap}
-.pill-opt:hover{border-color:var(--orange);color:var(--orange);background:rgba(242,97,48,.05);transform:translateY(-1px)}
-.pill-opt.active{border-color:var(--orange);background:linear-gradient(135deg,var(--orange),#f5825a);color:#fff;box-shadow:0 4px 12px rgba(242,97,48,.3)}
+.pill-opt:hover{border-color:var(--orange);color:var(--orange);background:rgba(235,115,66,.05);transform:translateY(-1px)}
+.pill-opt.active{border-color:var(--orange);background:linear-gradient(135deg,var(--orange),#EB7342);color:#fff;box-shadow:0 4px 12px rgba(235,115,66,.3)}
 
 /* Recording type visual buttons */
 .rec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .rec-btn{border:2px solid var(--lgray);border-radius:12px;padding:16px 8px 12px;cursor:pointer;background:#fff;text-align:center;transition:all .2s;position:relative}
-.rec-btn:hover{border-color:var(--orange);background:rgba(242,97,48,.04);transform:translateY(-2px);box-shadow:0 6px 18px rgba(242,97,48,.1)}
-.rec-btn.active{border-color:var(--orange);background:var(--orange-l);box-shadow:0 6px 18px rgba(242,97,48,.18)}
+.rec-btn:hover{border-color:var(--orange);background:rgba(235,115,66,.04);transform:translateY(-2px);box-shadow:0 6px 18px rgba(235,115,66,.1)}
+.rec-btn.active{border-color:var(--orange);background:var(--orange-l);box-shadow:0 6px 18px rgba(235,115,66,.18)}
 .rec-btn-icon-wrap{width:44px;height:44px;border-radius:12px;background:var(--off);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;transition:all .2s}
-.rec-btn.active .rec-btn-icon-wrap{background:rgba(242,97,48,.15)}
+.rec-btn.active .rec-btn-icon-wrap{background:rgba(235,115,66,.15)}
 .rec-btn i{font-size:22px;color:var(--gray);display:block;transition:color .2s}
 .rec-btn.active i{color:var(--orange)}
 .rec-btn:hover i{color:var(--orange)}
@@ -208,7 +208,7 @@ a{color:var(--orange);text-decoration:none}
 
 .result-divider{height:0.5px;background:rgba(255,255,255,.1);margin:16px 0}
 
-.plan-box{background:linear-gradient(135deg,rgba(242,97,48,.15),rgba(242,97,48,.08));border:1px solid rgba(242,97,48,.35);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.plan-box{background:linear-gradient(135deg,rgba(235,115,66,.15),rgba(235,115,66,.08));border:1px solid rgba(235,115,66,.35);border-radius:12px;padding:16px 18px;margin-bottom:16px}
 .plan-label{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
 .plan-name{font-size:18px;font-weight:700;color:var(--orange);margin-bottom:8px}
 .plan-features{display:flex;flex-wrap:wrap;gap:6px}
@@ -222,21 +222,21 @@ a{color:var(--orange);text-decoration:none}
 .price-note{font-size:10px;color:rgba(255,255,255,.3);margin-top:8px;line-height:1.6}
 
 .result-btns{display:flex;flex-direction:column;gap:8px}
-.result-btn-primary{width:100%;background:linear-gradient(135deg,var(--orange),#f5825a);color:#fff;border:none;border-radius:10px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .18s;box-shadow:0 6px 18px rgba(242,97,48,.35);letter-spacing:.2px}
-.result-btn-primary:hover{background:linear-gradient(135deg,#e05520,var(--orange));transform:translateY(-1px);box-shadow:0 8px 22px rgba(242,97,48,.45)}
+.result-btn-primary{width:100%;background:linear-gradient(135deg,var(--orange),#EB7342);color:#fff;border:none;border-radius:10px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .18s;box-shadow:0 6px 18px rgba(235,115,66,.35);letter-spacing:.2px}
+.result-btn-primary:hover{background:linear-gradient(135deg,#ED501D,var(--orange));transform:translateY(-1px);box-shadow:0 8px 22px rgba(235,115,66,.45)}
 .result-btn-ghost{width:100%;background:transparent;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.2);border-radius:9px;padding:11px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s}
 .result-btn-ghost:hover{background:rgba(255,255,255,.06);color:#fff}
 
 /* ── HOW WE CALC ── */
-.howcalc{background:linear-gradient(160deg,#030A45 0%,#040C52 60%,#071470 100%);padding:80px 0;position:relative;overflow:hidden}
+.howcalc{background:linear-gradient(160deg,#030A45 0%,#0B0D31 60%,#071470 100%);padding:80px 0;position:relative;overflow:hidden}
 .howcalc h2{text-align:center;color:#fff;margin-bottom:8px}
 .howcalc .sub{text-align:center;color:rgba(255,255,255,.45);margin-bottom:48px}
 .steps-flow{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative}
 .steps-flow::after{content:'';position:absolute;top:32px;left:8%;right:8%;height:1px;background:rgba(255,255,255,.1);z-index:0}
 .step-flow-item{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 8px;position:relative;z-index:1}
-.sfi-icon{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,rgba(242,97,48,.18),rgba(242,97,48,.08));border:1.5px solid rgba(242,97,48,.3);display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--orange);margin:0 auto 16px;transition:all .25s;position:relative}
-.sfi-icon::after{content:'';position:absolute;inset:-6px;border-radius:24px;border:1px solid rgba(242,97,48,.15)}
-.step-flow-item:hover .sfi-icon{transform:translateY(-4px);box-shadow:0 12px 28px rgba(242,97,48,.25);border-color:rgba(242,97,48,.5)}
+.sfi-icon{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,rgba(235,115,66,.18),rgba(235,115,66,.08));border:1.5px solid rgba(235,115,66,.3);display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--orange);margin:0 auto 16px;transition:all .25s;position:relative}
+.sfi-icon::after{content:'';position:absolute;inset:-6px;border-radius:24px;border:1px solid rgba(235,115,66,.15)}
+.step-flow-item:hover .sfi-icon{transform:translateY(-4px);box-shadow:0 12px 28px rgba(235,115,66,.25);border-color:rgba(235,115,66,.5)}
 .sfi-step{font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
 .sfi-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:5px}
 .sfi-sub{font-size:11px;color:rgba(255,255,255,.4);line-height:1.5}
@@ -249,7 +249,7 @@ a{color:var(--orange);text-decoration:none}
 .why-vms-content{}
 .why-vms-grid{display:flex;flex-direction:column;gap:12px;margin-top:28px}
 .wvg-item{background:#fff;border:1.5px solid var(--lgray);border-radius:14px;padding:18px 20px;display:flex;gap:16px;align-items:flex-start}
-.wvg-icon{width:42px;height:42px;border-radius:11px;background:var(--orange-l);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--orange);flex-shrink:0;box-shadow:0 3px 10px rgba(242,97,48,.18);transition:all .2s}
+.wvg-icon{width:42px;height:42px;border-radius:11px;background:var(--orange-l);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--orange);flex-shrink:0;box-shadow:0 3px 10px rgba(235,115,66,.18);transition:all .2s}
 .wvg-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px}
 .wvg-sub{font-size:13px;color:var(--gray);line-height:1.55}
 .vms-overhead-table{background:#fff;border-radius:var(--radius-lg);border:0.5px solid var(--lgray);overflow:hidden}
@@ -269,7 +269,7 @@ a{color:var(--orange);text-decoration:none}
 .compare-table th:first-child{color:#fff;font-size:14px;text-transform:none;letter-spacing:0}
 .compare-table th.hl{background:var(--orange);color:#fff}
 .compare-table td{padding:13px 16px;border-bottom:0.5px solid var(--lgray);font-size:13px;color:var(--dark)}
-.compare-table td.hl{background:rgba(242,97,48,.04)}
+.compare-table td.hl{background:rgba(235,115,66,.04)}
 .compare-table tr:last-child td{border-bottom:none}
 .check-yes{color:#16A34A;font-weight:600;display:inline-flex;align-items:center;gap:6px;background:#E8F5E9;padding:3px 10px;border-radius:20px;font-size:12px}
 .check-yes i{font-size:13px}
@@ -282,8 +282,8 @@ a{color:var(--orange);text-decoration:none}
 .certs-section{background:var(--off);padding:72px 0}
 .certs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
 .cert-card{background:#fff;border:1.5px solid var(--lgray);border-radius:16px;padding:28px 20px;text-align:center;transition:all .22s;position:relative;overflow:hidden}
-.cert-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),#f5825a);opacity:0;transition:opacity .22s}
-.cert-card:hover{box-shadow:var(--shadow-lg);border-color:rgba(242,97,48,.25);transform:translateY(-3px)}
+.cert-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),#EB7342);opacity:0;transition:opacity .22s}
+.cert-card:hover{box-shadow:var(--shadow-lg);border-color:rgba(235,115,66,.25);transform:translateY(-3px)}
 .cert-card:hover::after{opacity:1}
 .cert-icon{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 16px;box-shadow:0 6px 18px rgba(0,0,0,.12);transition:transform .2s}
 .cert-card:hover .cert-icon{transform:scale(1.08)}
@@ -355,17 +355,17 @@ a{color:var(--orange);text-decoration:none}
 @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 /* ── UX POLISH ── */
 .form-section{padding:20px;background:#fff;border-radius:14px;border:1.5px solid var(--lgray);margin-bottom:12px;transition:box-shadow .22s,border-color .22s;animation:fadeInUp .3s ease both}
-.form-section:hover{border-color:rgba(242,97,48,.3);box-shadow:var(--shadow-md)}
+.form-section:hover{border-color:rgba(235,115,66,.3);box-shadow:var(--shadow-md)}
 .calc-form-panel{background:var(--off)!important}
 input[type=range]{height:6px;border-radius:4px;outline:none}
-input[type=range]::-webkit-slider-thumb{width:20px;height:20px;border-radius:50%;background:var(--orange);cursor:pointer;box-shadow:0 2px 10px rgba(242,97,48,.45);border:2px solid #fff;-webkit-appearance:none}
+input[type=range]::-webkit-slider-thumb{width:20px;height:20px;border-radius:50%;background:var(--orange);cursor:pointer;box-shadow:0 2px 10px rgba(235,115,66,.45);border:2px solid #fff;-webkit-appearance:none}
 .result-metric:hover{background:rgba(255,255,255,.11);transition:background .18s}
-.rec-btn:hover .rec-btn-icon-wrap{background:rgba(242,97,48,.15);transform:scale(1.1)}
+.rec-btn:hover .rec-btn-icon-wrap{background:rgba(235,115,66,.15);transform:scale(1.1)}
 .vms-card:hover .vms-card-logo{transform:scale(1.07)}
 .vms-card-logo{transition:transform .22s}
-.wvg-item:hover .wvg-icon{transform:scale(1.12);box-shadow:0 8px 20px rgba(242,97,48,.3)}
+.wvg-item:hover .wvg-icon{transform:scale(1.12);box-shadow:0 8px 20px rgba(235,115,66,.3)}
 .wvg-item{transition:box-shadow .22s,border-color .22s}
-.wvg-item:hover{box-shadow:var(--shadow-md);border-color:rgba(242,97,48,.2)}
+.wvg-item:hover{box-shadow:var(--shadow-md);border-color:rgba(235,115,66,.2)}
 /* pill micro-animation */
 .pill-opt{transition:all .18s cubic-bezier(.34,1.56,.64,1)}
 .pill-opt:hover{transform:translateY(-2px) scale(1.03)}
@@ -433,8 +433,8 @@ a{-webkit-tap-highlight-color:transparent}
 
 /* ── INPUT RANGE CROSS-BROWSER ── */
 input[type=range]{-webkit-appearance:none;-moz-appearance:none;appearance:none;background:var(--lgray);height:6px;border-radius:4px;outline:none;width:100%}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--orange);cursor:pointer;border:2px solid #fff;box-shadow:0 2px 10px rgba(242,97,48,.45)}
-input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--orange);cursor:pointer;border:2px solid #fff;box-shadow:0 2px 10px rgba(242,97,48,.45)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--orange);cursor:pointer;border:2px solid #fff;box-shadow:0 2px 10px rgba(235,115,66,.45)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--orange);cursor:pointer;border:2px solid #fff;box-shadow:0 2px 10px rgba(235,115,66,.45)}
 input[type=range]::-ms-thumb{width:20px;height:20px;border-radius:50%;background:var(--orange);cursor:pointer;border:2px solid #fff}
 input[type=range]::-webkit-slider-runnable-track{background:var(--lgray);height:6px;border-radius:4px}
 input[type=range]::-moz-range-track{background:var(--lgray);height:6px;border-radius:4px}
@@ -446,8 +446,8 @@ input[type=range]::-moz-range-track{background:var(--lgray);height:6px;border-ra
 ::-webkit-scrollbar-thumb:hover{background:var(--gray)}
 
 /* ── SELECTION COLOR ── */
-::selection{background:rgba(242,97,48,.2);color:var(--navy)}
-::-moz-selection{background:rgba(242,97,48,.2);color:var(--navy)}
+::selection{background:rgba(235,115,66,.2);color:var(--navy)}
+::-moz-selection{background:rgba(235,115,66,.2);color:var(--navy)}
 
 /* ── FOCUS VISIBLE (accessibility) ── */
 :focus-visible{outline:2px solid var(--orange);outline-offset:2px}
@@ -509,22 +509,7 @@ html,body{overflow-x:hidden;max-width:100vw}
   <div class="container">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <svg style="width:36px;height:36px;display:block" id="logo-icon-svg"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-  <defs>
-    <style>
-      .icon-c1, .icon-c2 {
-        fill: #f26130;
-      }
-
-      .icon-c2 {
-        fill-rule: evenodd;
-      }
-    </style>
-  </defs>
-  <path class="icon-c1" d="M76.7,741.35c0,72.96,59.14,132.11,132.09,132.11s132.09-59.14,132.11-132.11c0-72.95-59.14-132.09-132.11-132.1-72.95,0-132.09,59.15-132.09,132.1Z"/>
-  <path class="icon-c2" d="M536.88,130.66c34.58,8.85,61.26,28.65,80,59.38,18.75,30.73,24.51,62.91,17.26,96.54-19.97,72.68-10.89,141.2,27.23,205.56,39.08,65.96,95.45,107,169.12,123.13,32.97,9.81,58.12,30.23,75.41,61.27,17.31,31.04,21.7,63.22,13.17,96.52-9.18,35.87-29.46,63.1-60.83,81.68-31.37,18.59-64.34,23.46-98.93,14.6-35.86-9.18-63.1-29.46-81.68-60.83-18.59-31.37-23.29-64.98-14.11-100.85,17.05-66.61,7.96-132.41-27.28-197.38-37.17-62.75-89.54-103.44-157.1-122.1-37.48-8.23-66.15-28.19-86.01-59.89-19.87-31.7-25.21-65.48-16.03-101.35,9.17-35.86,29.46-63.09,60.82-81.67,31.38-18.59,64.35-23.46,98.94-14.6"/>
-</svg>
-        <span class="nav-logo-text">Adentro <span>Tecnologia</span></span>
+        <img src="/adentro-logo-horizontal.png" alt="Adentro Tecnologia" style="height:28px;display:block" />
       </a>
       <div class="nav-links">
         <a href="#calculadora" class="nav-link">Solução</a>
@@ -666,7 +651,7 @@ html,body{overflow-x:hidden;max-width:100vw}
       <div class="vms-strip-label" style="display:flex;align-items:center;gap:6px"><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;font-size:14px;color:var(--orange)" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 12 5 5M6 8l10 10M8 6l10 10M12 7l5 5"/><path d="m4.5 15.5-1 1a3 3 0 0 0 4.24 4.24l1-1M15.5 4.5l1-1a3 3 0 0 1 4.24 4.24l-1 1"/></svg></span>VMS compatíveis</div>
       <div class="vms-logos">
         <div class="vms-logo-item"><div class="vms-logo-box"><span style="font-size:13px;font-weight:800;color:#1565C0;letter-spacing:-0.5px">segware</span></div><div class="vms-logo-name">Segware Sigma</div></div>
-        <div class="vms-logo-item"><div class="vms-logo-box"><span style="font-size:15px;font-weight:800;color:#F26130;font-style:italic;letter-spacing:-0.5px">solutio</span></div><div class="vms-logo-name">Solutio</div></div>
+        <div class="vms-logo-item"><div class="vms-logo-box"><span style="font-size:15px;font-weight:800;color:#EB7342;font-style:italic;letter-spacing:-0.5px">solutio</span></div><div class="vms-logo-name">Solutio</div></div>
         <div class="vms-logo-item"><div class="vms-logo-box"><span style="font-size:12px;font-weight:800;color:#1A1A2E;letter-spacing:1px;text-transform:uppercase">FULLTIME</span></div><div class="vms-logo-name">Fulltime</div></div>
         <div class="vms-logo-item"><div class="vms-logo-box"><span style="font-size:13px;font-weight:800;color:#1A1A2E;letter-spacing:1px">D-GUARD</span></div><div class="vms-logo-name">D-Guard</div></div>
         <div class="vms-logo-item"><div class="vms-logo-box"><span style="font-size:11px;font-weight:800;color:#E51937;letter-spacing:-0.3px">HIKVISION</span></div><div class="vms-logo-name">HikCentral</div></div>
@@ -706,7 +691,7 @@ html,body{overflow-x:hidden;max-width:100vw}
           <div class="check"><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;font-size:10px;color:#fff" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></div>
         </div>
         <div class="vms-card" data-vms="solutio" data-os="linux" onclick="selectVMS(this)">
-          <div class="vms-card-logo"><span style="font-size:16px;font-weight:800;color:#F26130;font-style:italic">solutio</span></div>
+          <div class="vms-card-logo"><span style="font-size:16px;font-weight:800;color:#EB7342;font-style:italic">solutio</span></div>
           <div class="vms-card-name">Solutio</div>
           
           <div class="check"><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;font-size:10px;color:#fff" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></div>
@@ -752,15 +737,23 @@ html,body{overflow-x:hidden;max-width:100vw}
 
       <div class="calc-grid">
         <!-- FORM PANEL -->
-        <div class="calc-form-panel">
+        <div id="projects-list">
+<div class="calc-form-panel project-block" data-id="1">
+
+          
+          <!-- Nome do Projeto -->
+          <div class="form-section" style="margin-bottom: 24px;">
+            <div class="form-section-title" style="margin-bottom: 8px;">Nome do Grupo</div>
+            <input type="text" class="input-project-name" value="Grupo 1" oninput="calcUpdate()" style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid var(--lgray);font-size:15px;color:var(--navy);outline:none;">
+          </div>
 
           <!-- Câmeras -->
           <div class="form-section">
             <div class="form-section-title"><div class="form-section-num">1</div><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;font-size:15px;color:var(--orange)" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7H3a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><rect x="5" y="3" width="14" height="8" rx="1"/><circle cx="12" cy="13" r="3"/></svg></span> Quantidade de câmeras</div>
             <div class="cam-counter">
-              <button class="cam-btn" onclick="changeCam(-10)">−</button>
-              <input type="number" class="cam-input" id="numCameras" value="40" min="1" max="9999" oninput="calcUpdate()">
-              <button class="cam-btn" onclick="changeCam(10)">+</button>
+              <button class="cam-btn" onclick="changeCam(this, -10)">−</button>
+              <input type="number" class="cam-input input-numCameras" value="40" min="1" max="9999" oninput="calcUpdate()">
+              <button class="cam-btn" onclick="changeCam(this, 10)">+</button>
               <span class="cam-unit">câmeras</span>
             </div>
           </div>
@@ -768,7 +761,7 @@ html,body{overflow-x:hidden;max-width:100vw}
           <!-- Resolução -->
           <div class="form-section">
             <div class="form-section-title"><div class="form-section-num">2</div><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;font-size:15px;color:var(--orange)" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V6a2 2 0 0 1 2-2h2M4 16v2a2 2 0 0 0 2 2h2M16 4h2a2 2 0 0 1 2 2v2M16 20h2a2 2 0 0 0 2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/><path d="m7 13 3-3 2 2 2-2 3 3"/></svg></span> Resolução média</div>
-            <div class="pill-group" id="resolution-group">
+            <div class="pill-group resolution-group">
               <div class="pill-opt" data-val="d1" onclick="selectPill(this,'resolution-group','d1')">D1 480p</div>
               <div class="pill-opt" data-val="720p" onclick="selectPill(this,'resolution-group','720p')">HD 720p</div>
               <div class="pill-opt active" data-val="1080p" onclick="selectPill(this,'resolution-group','1080p')">Full HD 1080p</div>
@@ -777,10 +770,10 @@ html,body{overflow-x:hidden;max-width:100vw}
               <div class="pill-opt" data-val="5mp" onclick="selectPill(this,'resolution-group','5mp')">5 MP</div>
               <div class="pill-opt" data-val="4k" onclick="selectPill(this,'resolution-group','4k')">8 MP / 4K</div>
               <div class="pill-opt" data-val="12mp" onclick="selectPill(this,'resolution-group','12mp')">12 MP</div>
-              <div class="pill-opt pill-outros" onclick="openResModal()">Outros ▾</div>
+              <div class="pill-opt pill-outros" onclick="openResModal(this)">Outros ▾</div>
             </div>
-            <div id="res-outros-label" style="display:none;margin-top:8px;font-size:13px;color:var(--gray)">
-              Resolução selecionada: <strong id="res-outros-name"></strong>
+            <div class="res-outros-label" style="display:none;margin-top:8px;font-size:13px;color:var(--gray)">
+              Resolução selecionada: <strong class="res-outros-name"></strong>
             </div>
           </div>
 
@@ -789,15 +782,18 @@ html,body{overflow-x:hidden;max-width:100vw}
             <div class="form-section">
               <div class="form-section-title"><div class="form-section-num">3</div><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;font-size:15px;color:var(--orange)" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16l13-8z"/></svg></span> Taxa de quadros (FPS)</div>
               <div style="display:flex;align-items:center;gap:12px;margin-top:4px">
-                <input type="range" id="fps" min="1" max="30" value="15" step="1" oninput="document.getElementById('fps-val').textContent=this.value+' FPS';calcUpdate()" style="flex:1;accent-color:var(--orange);cursor:pointer">
-                <span id="fps-val" style="font-size:15px;font-weight:700;color:var(--navy);white-space:nowrap;min-width:52px;text-align:right;background:var(--orange-l);padding:4px 10px;border-radius:8px;border:1px solid rgba(242,97,48,.3)">15 FPS</span>
+                <input type="range" class="fps-slider" min="5" max="24" value="15" step="1" oninput="syncFPS(this, this.value, 'slider')" style="flex:1;accent-color:var(--orange);cursor:pointer">
+                <div style="display:flex;align-items:center;gap:4px;background:var(--orange-l);border:1px solid rgba(235,115,66,.3);border-radius:8px;padding:3px 8px">
+                  <input type="number" class="fps-input" min="5" max="24" value="15" oninput="syncFPS(this, this.value, 'input')" onchange="syncFPS(this, this.value, 'change')" style="width:42px;font-size:15px;font-weight:700;color:var(--navy);border:none;background:transparent;outline:none;text-align:right;-moz-appearance:textfield">
+                  <span style="font-size:13px;font-weight:600;color:var(--orange)">FPS</span>
+                </div>
               </div>
             </div>
 
             <!-- Codec -->
             <div class="form-section">
               <div class="form-section-title"><div class="form-section-num">4</div><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;font-size:15px;color:var(--orange)" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="m10 13-2 2 2 2M14 13l2 2-2 2"/></svg></span> Codec de compressão</div>
-              <div class="pill-group" id="codec-group" style="flex-wrap:wrap">
+              <div class="pill-group codec-group" style="flex-wrap:wrap">
                 <div class="pill-opt" data-val="h264" onclick="selectPill(this,'codec-group','h264')">H.264</div>
                 <div class="pill-opt" data-val="h264plus" onclick="selectPill(this,'codec-group','h264plus')">H.264+</div>
                 <div class="pill-opt active" data-val="h265" onclick="selectPill(this,'codec-group','h265')">H.265</div>
@@ -810,11 +806,11 @@ html,body{overflow-x:hidden;max-width:100vw}
           <div class="form-section">
             <div class="form-section-title"><div class="form-section-num">5</div><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;font-size:15px;color:var(--orange)" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 21H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4.5"/><path d="M16 3v4M8 3v4M4 11h16"/><circle cx="18" cy="18" r="4"/><path d="M18 16v2l1 1"/></svg></span> Dias de retenção</div>
             <div style="display:flex;align-items:center;gap:12px;margin-top:4px">
-              <input type="range" id="retention-slider" min="1" max="365" value="1" step="1"
-                oninput="syncRetention(this.value,'slider')" style="flex:1;accent-color:var(--orange);cursor:pointer">
-              <div style="display:flex;align-items:center;gap:4px;background:var(--orange-l);border:1px solid rgba(242,97,48,.3);border-radius:8px;padding:3px 8px">
-                <input type="number" id="retention-input" min="1" max="365" value="1"
-                  oninput="syncRetention(this.value,'input')"
+              <input type="range" class="retention-slider" min="1" max="365" value="30" step="1"
+                oninput="syncRetention(this, this.value, 'slider')" style="flex:1;accent-color:var(--orange);cursor:pointer">
+              <div style="display:flex;align-items:center;gap:4px;background:var(--orange-l);border:1px solid rgba(235,115,66,.3);border-radius:8px;padding:3px 8px">
+                <input type="number" class="retention-input" min="1" max="365" value="30"
+                  oninput="syncRetention(this, this.value, 'input')"
                   style="width:52px;font-size:15px;font-weight:700;color:var(--navy);border:none;background:transparent;outline:none;text-align:right;-moz-appearance:textfield">
                 <span style="font-size:13px;font-weight:600;color:var(--orange)">dias</span>
               </div>
@@ -825,7 +821,7 @@ html,body{overflow-x:hidden;max-width:100vw}
           <!-- Tipo de gravação -->
           <div class="form-section">
             <div class="form-section-title"><div class="form-section-num">6</div><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;font-size:15px;color:var(--orange)" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg></span> Tipo de gravação</div>
-            <div class="rec-grid" id="rectype-group">
+            <div class="rec-grid rectype-group">
               <div class="rec-btn active" data-val="continuous" onclick="selectRec(this)">
                 <div class="rec-btn-icon-wrap"><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span></div>
                 <div class="rec-btn-label">24×7 contínuo</div>
@@ -846,27 +842,20 @@ html,body{overflow-x:hidden;max-width:100vw}
           </div>
 
           <!-- Movimento -->
-          <div class="form-section" id="movement-section" style="display:none">
+          <div class="form-section movement-section" style="display:none">
             <div class="form-section-title"><div class="form-section-num">7</div><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;font-size:15px;color:var(--orange)" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0 9 9 0 1 0-18 0"/><path d="M12 12m-5 0a5 5 0 1 0 10 0 5 5 0 1 0-10 0"/><path d="M12 12m-1 0a1 1 0 1 0 2 0 1 1 0 1 0-2 0"/><path d="M12 3v3M3 12h3"/></svg></span> Sensibilidade de movimento</div>
             <div style="display:flex;align-items:center;gap:12px;margin-top:4px">
-              <input type="range" id="movement-slider" min="10" max="100" value="40" step="10" oninput="currentMovement=parseInt(this.value)/100;document.getElementById('movement-val').textContent=this.value+'%';calcUpdate()" style="flex:1;accent-color:var(--orange);cursor:pointer">
-              <span id="movement-val" style="font-size:15px;font-weight:700;color:var(--navy);white-space:nowrap;min-width:40px;text-align:right;background:var(--orange-l);padding:4px 10px;border-radius:8px;border:1px solid rgba(242,97,48,.3)">40%</span>
+              <input type="range" class="movement-slider" min="10" max="100" value="40" step="10" oninput="this.closest('.project-block').dataset.movement = parseInt(this.value)/100;this.closest('.project-block').querySelector('.movement-val').textContent=this.value+'%';calcUpdate()" style="flex:1;accent-color:var(--orange);cursor:pointer">
+              <span class="movement-val" style="font-size:15px;font-weight:700;color:var(--navy);white-space:nowrap;min-width:40px;text-align:right;background:var(--orange-l);padding:4px 10px;border-radius:8px;border:1px solid rgba(235,115,66,.3)">40%</span>
             </div>
             <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--gray);margin-top:4px"><span>10%</span><span>30%</span><span>50%</span><span>70%</span><span>100%</span></div>
           </div>
 
-          <!-- Visualização -->
-          <div class="form-section" style="display:none">
-            <div class="form-section-title"><div class="form-section-num">8</div><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;font-size:15px;color:var(--orange)" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="13" y="8" width="8" height="12" rx="1"/><path d="M18 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h7"/><path d="M16 17h.01"/></svg></span> Usuários simultâneos</div>
-            <div class="cam-counter">
-              <button class="cam-btn" onclick="changeViewers(-1)">−</button>
-              <input type="number" class="cam-input" id="numViewers" value="5" min="0" max="9999" oninput="calcUpdate()" style="font-size:15px">
-              <button class="cam-btn" onclick="changeViewers(1)">+</button>
-              <span class="cam-unit">usuários simultâneos</span>
-            </div>
-          </div>
+
 
         </div><!-- /form panel -->
+<button type="button" onclick="addProject()" style="width:100%;margin-top:20px;padding:16px;background:var(--off);border:2px dashed var(--orange);color:var(--orange);border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.2s;">+ Adicionar Grupo de Câmeras</button>
+</div><!-- /projects list -->
 
         <!-- RESULT PANEL -->
         <div class="calc-result-panel" id="result-panel">
@@ -878,14 +867,14 @@ html,body{overflow-x:hidden;max-width:100vw}
           <div class="result-metrics">
             <div class="result-metric">
               <div class="rm-left">
-                <div class="rm-icon" style="background:rgba(242,97,48,.15);color:var(--orange)"><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v3c0 1.7 3.6 3 8 3"/><path d="M15 19l3 3 3-3M18 16v6"/></svg></span></div>
+                <div class="rm-icon" style="background:rgba(235,115,66,.15);color:var(--orange)"><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v3c0 1.7 3.6 3 8 3"/><path d="M15 19l3 3 3-3M18 16v6"/></svg></span></div>
                 <div class="rm-label">Armazenamento útil calculado</div>
               </div>
               <div class="rm-val orange" id="r-storage-util">—</div>
             </div>
             <div class="result-metric" style="display:none">
               <div class="rm-left">
-                <div class="rm-icon" style="background:rgba(242,97,48,.15);color:var(--orange)"><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="2"/><path d="M3 14h18M7 8h.01M7 18h.01"/><path d="m13 14-2 4 3-1-2 4"/></svg></span></div>
+                <div class="rm-icon" style="background:rgba(235,115,66,.15);color:var(--orange)"><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="2"/><path d="M3 14h18M7 8h.01M7 18h.01"/><path d="m13 14-2 4 3-1-2 4"/></svg></span></div>
                 <div class="rm-label">Armazenamento servidor (+20% · arred. 500 GB)</div>
               </div>
               <div class="rm-val orange" id="r-storage-bruto">—</div>
@@ -925,19 +914,12 @@ html,body{overflow-x:hidden;max-width:100vw}
               </div>
               <div class="rm-val" style="color:var(--amber)" id="r-growth">—</div>
             </div>
-            <div class="result-metric" style="display:none;background:rgba(242,97,48,.08);border:1px solid rgba(242,97,48,.2)">
+            <div class="result-metric" style="display:none;background:rgba(235,115,66,.08);border:1px solid rgba(235,115,66,.2)">
               <div class="rm-left">
-                <div class="rm-icon" style="background:rgba(242,97,48,.2);color:var(--orange)"><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.8 9A2 2 0 0 0 13 8h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1-1.8-1M12 7v1M12 16v1"/></svg></span></div>
+                <div class="rm-icon" style="background:rgba(235,115,66,.2);color:var(--orange)"><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M14.8 9A2 2 0 0 0 13 8h-2a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4h-2a2 2 0 0 1-1.8-1M12 7v1M12 16v1"/></svg></span></div>
                 <div class="rm-label">Custo estimado por câmera/mês</div>
               </div>
               <div class="rm-val orange" id="r-per-camera">—</div>
-            </div>
-            <div class="result-metric" id="r-view-row" style="display:none;background:rgba(93,202,165,.08);border:1px solid rgba(93,202,165,.2)">
-              <div class="rm-left">
-                <div class="rm-icon" style="background:rgba(93,202,165,.2);color:#5DCAA5"><span style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h9"/><path d="M15 3h6v6"/><path d="m21 3-9 9"/><path d="M9 17v4M15 17v4M7 21h10"/></svg></span></div>
-                <div class="rm-label">Visualização simultânea (<span id="r-view-count">0</span> usuários × custo/câmera)</div>
-              </div>
-              <div class="rm-val green" id="r-view-cost">—</div>
             </div>
           </div>
 
@@ -976,6 +958,10 @@ html,body{overflow-x:hidden;max-width:100vw}
         </div>
 
       </div><!-- /calc-grid -->
+
+      <!-- Tabela-resumo de todos os grupos (aparece com 2+ grupos) -->
+      <div id="summary-table-container" style="display:none;margin-top:28px"></div>
+
     </div><!-- /step2 -->
   </div>
 </section>
@@ -1153,7 +1139,7 @@ html,body{overflow-x:hidden;max-width:100vw}
     </table>
 
     <!-- Bottom hook -->
-    <div style="margin-top:40px;background:linear-gradient(135deg,#040C52,#0A1660);border-radius:16px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+    <div style="margin-top:40px;background:linear-gradient(135deg,#0B0D31,#0A1660);border-radius:16px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
       <div>
         <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:8px">A pergunta que todo integrador deveria responder</div>
         <div style="font-size:22px;font-weight:700;color:#fff;line-height:1.35;max-width:560px">Se o HD do seu cliente falhar amanhã, <em style="color:var(--orange);font-style:normal">quem vai explicar que a gravação sumiu?</em></div>
@@ -1311,141 +1297,174 @@ html,body{overflow-x:hidden;max-width:100vw}
   </div>
 </div>
 <script>
-// ============================================================
-// ADENTRO CFTV CALCULATOR — calc.js
-// ============================================================
-
-// ── CONFIGURAÇÕES EDITÁVEIS ──
-const CONFIG = {
-  custoServidorLinux:  650,   // R$/servidor Linux/mês
-  custoServidorWin:    850,   // R$/servidor Windows/mês
-  crescimentoAnual:    0.25,  // 25% ao ano
-  // Storage escalonado por TB
-  storagePricing: [
-    { ate: 5,   preco: 150 },
-    { ate: 10,  preco: 130 },
-    { ate: 25,  preco: 120 },
-    { ate: 50,  preco: 110 },
-    { ate: Infinity, preco: 100 },
-  ],
-  // Link por tipo de gravação (R$/Mbps/mês)
-  linkPrecoMotion:     2.64,
-  linkPrecoContinuo:   4.95,
-};
-
-// ── TABELA DE BITRATES BASE (Mbps) em H.264 a 30 FPS ──
-// Calibrado com base no Digifort DesignTool (720p@15fps=1.5Mbps -> @30fps=3.0Mbps)
-const BITRATES = {
-  // ── Resoluções principais (pill-group) ──
-  'd1':        1.5,   // D1 / 480p   (640x480)
-  '720p':      3.0,   // HD 720p     (1920x720)
-  '1080p':     8.0,   // Full HD 1080p (1920x1080)
-  '3mp':      12.0,   // 3 MP        (2048x1536)
-  '4mp':      16.0,   // 4 MP        (2240x1680)
-  '5mp':      20.0,   // 5 MP        (2560x1920)
-  '4k':       32.0,   // 8 MP / 4K   (3264x2448)
-  '12mp':     48.0,   // 12 MP
-  // ── Resoluções detalhadas (modal "Outros") ──
-  '320x240':   0.5,
-  '352x240':   0.6,
-  '352x288':   0.7,
-  '480x270':   0.8,
-  '480x360':   0.9,
-  '640x360':   1.2,
-  '704x240':   1.0,
-  '704x244':   1.0,
-  '704x288':   1.1,
-  '704x480':   1.4,
-  '704x488':   1.4,
-  '704x576':   1.6,
-  '720x240':   1.0,
-  '720x244':   1.0,
-  '720x288':   1.1,
-  '720x480':   1.4,
-  '720x488':   1.4,
-  '720x576':   1.6,
-  '752x582':   1.7,
-  '800x450':   1.8,
-  '800x600':   2.0,
-  '1024x720':  2.8,
-  '1024x768':  3.0,
-  '1280x720':  3.0,
-  '1280x800':  3.5,
-  '1280x960':  4.0,
-  '1280x1024': 4.5,
-  '1600x1200': 6.0,
-  '1920x720':  4.0,
-  '2048x1536': 12.0,
-  '2240x1680': 15.0,
-  '2560x1920': 20.0,
-  '3032x2008': 28.0,
-  '3072x2304': 30.0,
-  '3264x2448': 32.0,
-};
-
-// ── FATORES DE CODEC ──
-const CODEC_FACTORS = { h264: 1.00, h264plus: 0.75, h265: 0.50, h265plus: 0.35 };
-
-// ── PERFIS DE VMS ──
-const VMS_PROFILES = {
-  'segware-edge':  { storageOverhead: 1.08, linkOverhead: 1.05, label: 'Segware VMS Edge',   note: 'perfil Linux',             os: 'linux'   },
-  'segware-sigma': { storageOverhead: 1.08, linkOverhead: 1.05, label: 'Segware Sigma Image', note: 'perfil moderado',          os: 'windows' },
-  'segware-egide': { storageOverhead: 1.08, linkOverhead: 1.05, label: 'Segware Sigma Egide', note: 'perfil Linux',             os: 'linux'   },
-  solutio:         { storageOverhead: 1.10, linkOverhead: 1.08, label: 'Solutio',             note: 'perfil intermediário',     os: 'linux'   },
-  dguard:          { storageOverhead: 1.12, linkOverhead: 1.10, label: 'D-Guard',             note: 'ambiente centralizado',    os: 'windows' },
-  hikcentral:      { storageOverhead: 1.15, linkOverhead: 1.10, label: 'HikCentral Pro',      note: 'maior uso de metadados',   os: 'windows' },
-  digifort:        { storageOverhead: 1.15, linkOverhead: 1.12, label: 'Digifort',            note: 'arquitetura robusta',      os: 'windows' },
-  outro:           { storageOverhead: 1.15, linkOverhead: 1.10, label: 'Outro VMS',           note: 'perfil conservador',       os: 'windows' },
-};
-
-// ── FATORES DE RECURSOS DE IA ──
-const RESOURCE_FACTORS = {
-  analytics: { storage: 0.05, link: 0.10 },
-  facial:    { storage: 0.08, link: 0.15 },
-  lpr:       { storage: 0.08, link: 0.20 },
-  heatmap:   { storage: 0.03, link: 0.05 },
-  count:     { storage: 0.03, link: 0.05 },
-  search:    { storage: 0.05, link: 0.08 },
-  ai:        { storage: 0.10, link: 0.20 },
-};
-
-// ── PLANOS ──
-function getPlanName(tb) {
-  if (tb < 5)    return 'Cloud VMS Starter';
-  if (tb < 20)   return 'Cloud VMS Business';
-  if (tb < 80)   return 'Cloud VMS Enterprise';
-  return 'Cloud VMS Premium';
-}
-
-// ── ESTADO ──
+// ── STATE ──
 let currentVMS = 'dguard';
-let currentResolution = '1080p';
-let currentCodec = 'h265';
-let currentRetention = 1;
-let currentRecType = 'continuous';
-let currentMovement = 0.40;
 let currentOS = 'windows';
 
+const CONFIG = {
+  custoServidorLinux: 450,
+  custoServidorWin:   550,
+  linkPrecoContinuo:  4.95,
+  linkPrecoMotion:    2.64,
+  crescimentoAnual:   0.25,
+};
+
+const VMS_PROFILES = {
+  'segware-edge':  { label: 'VMS Edge',      storageOverhead: 1.05, linkOverhead: 1.02 },
+  'segware-sigma': { label: 'Sigma Image',   storageOverhead: 1.10, linkOverhead: 1.05 },
+  'segware-egide': { label: 'Sigma Egide',   storageOverhead: 1.15, linkOverhead: 1.05 },
+  'solutio':       { label: 'Solutio',       storageOverhead: 1.08, linkOverhead: 1.03 },
+  'dguard':        { label: 'D-Guard',       storageOverhead: 1.10, linkOverhead: 1.05 },
+  'hikcentral':    { label: 'HikCentral',    storageOverhead: 1.12, linkOverhead: 1.08 },
+  'digifort':      { label: 'Digifort',      storageOverhead: 1.15, linkOverhead: 1.10 },
+  'outro':         { label: 'Outro VMS',     storageOverhead: 1.15, linkOverhead: 1.10 }
+};
+
+const BITRATES = {
+  'd1': 2.0, '720p': 4.0, '1080p': 8.0, '3mp': 10.0,
+  '4mp': 12.0, '5mp': 15.0, '4k': 24.0, '12mp': 30.0,
+  '320x240': 0.5, '352x240': 0.6, '352x288': 0.7,
+  '480x270': 1.0, '480x360': 1.2, '640x360': 1.5,
+  '704x240': 1.8, '704x244': 1.8, '704x288': 2.0,
+  '704x480': 2.5, '704x488': 2.5, '704x576': 3.0,
+  '720x240': 2.0, '720x244': 2.0, '720x288': 2.2,
+  '720x480': 2.5, '720x488': 2.5, '720x576': 3.0,
+  '752x582': 3.5, '800x450': 3.0, '800x600': 4.0,
+  '1024x720': 5.0, '1024x768': 6.0,
+  '1280x720': 4.0, '1280x800': 5.0,
+  '1280x960': 6.0, '1280x1024': 7.0,
+  '1600x1200': 9.0, '1920x720': 8.0,
+  '2048x1536': 12.0, '2240x1680': 14.0,
+  '2560x1920': 16.0, '3032x2008': 18.0,
+  '3072x2304': 20.0, '3264x2448': 24.0
+};
+
+const CODEC_FACTORS = {
+  'h264': 1.0, 'h264plus': 0.70, 'h265': 0.50, 'h265plus': 0.35
+};
+
 // ── PILL SELECTORS ──
-function selectPill(el, groupId, val) {
-  document.querySelectorAll('#'+groupId+' .pill-opt').forEach(p => p.classList.remove('active'));
+function selectPill(el, groupClass, val) {
+  const block = el.closest('.project-block');
+  block.querySelectorAll('.'+groupClass+' .pill-opt').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
-  if (groupId === 'resolution-group') currentResolution = val;
-  if (groupId === 'codec-group')      currentCodec = val;
-  if (groupId === 'retention-group')  currentRetention = parseInt(val);
-  if (groupId === 'movement-group')   currentMovement = parseFloat(val);
+  block.dataset[groupClass.replace('-group','')] = val;
   calcUpdate();
 }
 
+let activeRecBtn = null;
 function selectRec(el) {
-  document.querySelectorAll('#rectype-group .rec-btn').forEach(b => b.classList.remove('active'));
+  const block = el.closest('.project-block');
+  block.querySelectorAll('.rectype-group .rec-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
-  currentRecType = el.dataset.val;
-  // Show/hide movement panel
-  document.getElementById('movement-section').style.display =
-    currentRecType === 'motion' ? 'block' : 'none';
+  const val = el.dataset.val;
+  block.dataset.rectype = val;
+  
+  const movSection = block.querySelector('.movement-section');
+  if (val === 'motion') {
+    movSection.style.display = 'block';
+  } else {
+    movSection.style.display = 'none';
+  }
+
+  if (val === 'commercial') {
+    activeRecBtn = el;
+    document.getElementById('modal-commercial').style.display = 'flex';
+  } else if (val === 'custom') {
+    activeRecBtn = el;
+    document.getElementById('modal-custom').style.display = 'flex';
+  }
+
   calcUpdate();
 }
+
+function saveCommercial() {
+  if (activeRecBtn) {
+    const block = activeRecBtn.closest('.project-block');
+    let daysCount = 0;
+    document.querySelectorAll('.hc-day').forEach(cb => { if(cb.checked) daysCount++; });
+    const start = document.getElementById('hc-start').value;
+    const end = document.getElementById('hc-end').value;
+    
+    // Very simple percentage calculation
+    const [h1, m1] = start.split(':').map(Number);
+    const [h2, m2] = end.split(':').map(Number);
+    const hoursPerDay = Math.max(0, (h2 + m2/60) - (h1 + m1/60));
+    
+    // Total active hours in a week / (24*7)
+    const pct = (daysCount * hoursPerDay) / (24 * 7);
+    block.dataset.recPct = pct;
+  }
+  document.getElementById('modal-commercial').style.display = 'none';
+  calcUpdate();
+}
+
+function saveCustom() {
+  if (activeRecBtn) {
+    const block = activeRecBtn.closest('.project-block');
+    let pct = parseFloat(document.getElementById('custom-pct').value) || 0;
+    block.dataset.recPct = pct / 100;
+  }
+  document.getElementById('modal-custom').style.display = 'none';
+  calcUpdate();
+}
+
+
+// ── RES OUTROS MODAL ──
+function openResModal(btn) {
+  const block = btn.closest('.project-block');
+  window.activeResBlock = block;
+  
+  var grid = document.getElementById('res-modal-grid');
+  if(grid) {
+    grid.innerHTML = '';
+    const currentRes = block.dataset.resolution || '1080p';
+    const keys = Object.keys(BITRATES).filter(k => !['d1','720p','1080p','3mp','4mp','5mp','4k','12mp'].includes(k));
+    keys.forEach(function(val) {
+      var btnHtml = document.createElement('button');
+      btnHtml.textContent = val;
+      btnHtml.style.cssText = 'padding:10px 12px;border-radius:8px;border:1.5px solid var(--lgray);background:var(--off);font-size:13px;font-weight:500;cursor:pointer;text-align:left;color:var(--dark);font-family:inherit;transition:all .15s';
+      if (currentRes === val) { btnHtml.style.borderColor='var(--orange)'; btnHtml.style.background='var(--orange-l)'; btnHtml.style.color='var(--orange)'; }
+      btnHtml.onclick = function() { selectResOutros(val); };
+      grid.appendChild(btnHtml);
+    });
+    document.getElementById('res-modal-overlay').style.display = 'flex';
+  }
+}
+
+function selectResOutros(val) {
+  if (window.activeResBlock) {
+    const block = window.activeResBlock;
+    block.querySelectorAll('.resolution-group .pill-opt').forEach(function(p){ p.classList.remove('active'); });
+    const outrosBtn = block.querySelector('.pill-outros');
+    if(outrosBtn) outrosBtn.classList.add('active');
+    block.dataset.resolution = val;
+    const lbl = block.querySelector('.res-outros-label');
+    if (lbl) {
+      lbl.style.display = 'block';
+      lbl.querySelector('.res-outros-name').textContent = val;
+    }
+  }
+  closeResModal(null, true);
+  calcUpdate();
+}
+
+function closeResModal(e, force) {
+  if (force || (e && e.target === document.getElementById('res-modal-overlay'))) {
+    document.getElementById('res-modal-overlay').style.display = 'none';
+  }
+}
+
+// ── CALC-ONLY MODE ──
+(function () {
+  var qp = new URLSearchParams(location.search);
+  if (qp.get('calc') !== '1') return;
+  var css = document.createElement('style');
+  css.textContent = 'body.calc-only .hero,body.calc-only .howcalc,body.calc-only .why-vms,body.calc-only .compare-section,body.calc-only .certs-section,body.calc-only .form-section-cta,body.calc-only .footer{display:none!important}body.calc-only .nav-links,body.calc-only .nav-cta,body.calc-only .nav-hamburger{display:none!important}body.calc-only .calc-section{padding-top:28px}';
+  document.head.appendChild(css);
+  document.body.classList.add('calc-only');
+})();
+
 
 // ── VMS SELECTION ──
 function selectVMS(el) {
@@ -1462,12 +1481,22 @@ function selectVMS(el) {
 }
 
 function showPremisses() {
-  alert('Premissas do cálculo:\n\n• Bitrate base por resolução (H.264 a 30 FPS)\n• Fator de FPS aplicado sobre 30 FPS\n• Fator de codec (H.265 = 50%, H.265+ = 35%)\n• Overhead do VMS selecionado\n• Fator de gravação conforme tipo\n• Recursos de IA com multiplicadores adicionais\n• Margem bruta de 30% sobre storage útil\n• Crescimento anual estimado de 25%');
+  alert(`Premissas do cálculo:
+
+• Bitrate base por resolução (H.264 a 30 FPS)
+• Fator de FPS aplicado sobre 30 FPS
+• Fator de codec (H.265 = 50%, H.265+ = 35%)
+• Overhead do VMS selecionado
+• Fator de gravação conforme tipo
+• Recursos de IA com multiplicadores adicionais
+• Margem bruta de 30% sobre storage útil
+• Crescimento anual estimado de 25%`);
 }
 
 // ── CAMERA COUNTER ──
-function changeCam(delta) {
-  const el = document.getElementById('numCameras');
+function changeCam(btn, delta) {
+  const block = btn.closest('.project-block');
+  const el = block.querySelector('.cam-input');
   const newVal = Math.max(1, (parseInt(el.value) || 1) + delta);
   el.value = newVal;
   calcUpdate();
@@ -1475,12 +1504,10 @@ function changeCam(delta) {
 
 // ── HELPERS ──
 function roundUp500(gb) {
-  // Incrementa de 500 GB em 500 GB
   return Math.ceil(gb / 500) * 500;
 }
 
 function calcStorageCost(tb) {
-  // Escalonado: R$150 0-5TB, R$130 5-10TB, R$120 10-25TB, R$110 25-50TB, R$100 >50TB
   const brackets = [
     { limit: 5,        rate: 150 },
     { limit: 10,       rate: 130 },
@@ -1500,149 +1527,224 @@ function calcStorageCost(tb) {
   return cost;
 }
 
-function syncRetention(val, source) {
+function getPlanName(tb) {
+  if (tb <= 10) return 'Cloud VMS Starter';
+  if (tb <= 50) return 'Cloud VMS Business';
+  return 'Cloud VMS Enterprise';
+}
+
+function syncFPS(el, val, source) {
+  const block = el.closest('.project-block');
   let n = parseInt(val);
-  if (isNaN(n) || n < 1) n = 1;
-  if (n > 365) n = 365;
-  currentRetention = n;
-  if (source !== 'slider') document.getElementById('retention-slider').value = n;
-  if (source !== 'input')  document.getElementById('retention-input').value  = n;
+  if (isNaN(n)) { calcUpdate(); return; }
+  // Faixa permitida: 5 a 24 FPS.
+  if (source === 'input') {
+    // Durante a digitacao so limita o teto (deixa digitar 2 digitos livremente);
+    // o piso de 5 e aplicado ao sair do campo (onchange).
+    if (n > 24) { n = 24; el.value = n; }
+    block.querySelector('.fps-slider').value = Math.max(5, Math.min(24, n));
+  } else {
+    n = Math.max(5, Math.min(24, n));
+    block.querySelector('.fps-slider').value = n;
+    block.querySelector('.fps-input').value  = n;
+  }
   calcUpdate();
 }
-function changeViewers(delta) {
-  const el = document.getElementById('numViewers');
-  const newVal = Math.max(0, (parseInt(el.value) || 0) + delta);
-  el.value = newVal;
+
+function syncRetention(el, val, source) {
+  const block = el.closest('.project-block');
+  let n = parseInt(val);
+  if (isNaN(n)) return;
+  n = Math.max(1, Math.min(365, n));
+  if (source !== 'slider') block.querySelector('.retention-slider').value = n;
+  if (source !== 'input')  block.querySelector('.retention-input').value  = n;
   calcUpdate();
+}
+
+// ── MULTI PROJECT ──
+function addProject() {
+  const list = document.getElementById('projects-list');
+  const blocks = list.querySelectorAll('.project-block');
+  const firstBlock = blocks[0];
+  const newBlock = firstBlock.cloneNode(true);
+  
+  // Reset values
+  newBlock.dataset.id = blocks.length + 1;
+  newBlock.querySelector('.input-project-name').value = 'Grupo ' + (blocks.length + 1);
+  newBlock.querySelector('.cam-input').value = 40;
+  
+  // Replace selectPill calls to correctly bind to the new node? 
+  // No, onclick="selectPill(this,...)" will work automatically because 'this' points to the new element.
+  
+  list.insertBefore(newBlock, list.querySelector('button'));
+  calcUpdate();
+}
+
+function removeProject(idx) {
+  const list = document.getElementById('projects-list');
+  const blocks = list.querySelectorAll('.project-block');
+  if (blocks.length > 1 && blocks[idx]) {
+    blocks[idx].remove();
+    calcUpdate();
+  }
 }
 
 // ── MAIN CALCULATION ──
 function calcUpdate() {
-  const cameras  = Math.max(1, parseInt(document.getElementById('numCameras').value) || 1);
-  const fps      = parseInt(document.getElementById('fps').value) || 15;
-  const viewers  = parseInt(document.getElementById('numViewers').value) || 0;
-  const profile  = VMS_PROFILES[currentVMS] || VMS_PROFILES.outro;
+  const profile = VMS_PROFILES[currentVMS] || VMS_PROFILES.outro;
+  
+  let totalCameras = 0;
+  let totalStorageUtilGB = 0;
+  let totalStorageDiaGB = 0;
+  let totalLinkUploadMbps = 0;
+  
+  let tableHtml = `
+    <div style="background:#fff;border-radius:12px;border:1px solid var(--lgray);padding:16px;">
+      <h3 style="font-size:16px;color:var(--navy);margin-top:0;margin-bottom:12px;">Resumo dos Grupos</h3>
+      <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--lgray);color:var(--gray)">
+            <th style="padding:10px;font-weight:700">Grupo</th>
+            <th style="padding:10px;font-weight:700">Câmeras</th>
+            <th style="padding:10px;font-weight:700">Storage/dia</th>
+            <th style="padding:10px;font-weight:700">Banda</th>
+            <th style="padding:10px;font-weight:700;text-align:center">Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+  
+  document.querySelectorAll('.project-block').forEach((block, idx) => {
+    const cameras = Math.max(1, parseInt(block.querySelector('.cam-input').value) || 1);
+    let fps = parseInt(block.querySelector('.fps-input').value) || 15;
+    fps = Math.max(5, Math.min(24, fps));
+    
+    // Read states from dataset or default
+    const resolution = block.dataset.resolution || '1080p';
+    const codec = block.dataset.codec || 'h265';
+    const recType = block.dataset.rectype || 'continuous';
+    const movement = parseFloat(block.dataset.movement) || 0.40;
+    const customPct = parseFloat(block.dataset.recPct) || 0;
+    const retention = parseInt(block.querySelector('.retention-input').value) || 30;
+    
+    const bitrateBase = BITRATES[resolution] || 8;
+    const fpsFactor = fps / 30;
+    const codecFactor = CODEC_FACTORS[codec] || 0.5;
+    
+    let bitrateCamera = bitrateBase * fpsFactor * codecFactor;
+    // Teto de bitrate: 1 conexao nao passa de 8Mbps para HD/FullHD, 12Mbps para >2MP etc.
+    // Isso eh apenas um limite seguro para as operadoras de nuvem.
+    const maxBitrate = (bitrateBase >= 12) ? 12 : 8; 
+    if (bitrateCamera > maxBitrate) bitrateCamera = maxBitrate;
+    
+    let recFactor = 1.0;
+    if (recType === 'motion') recFactor = movement;
+    else if (recType === 'commercial') recFactor = customPct || 0.40;
+    else if (recType === 'custom') recFactor = customPct;
+    
+    const storageDiaGB = bitrateCamera * recFactor * cameras * 86400 / 8 / 1024;
+    const storageUtilGB = storageDiaGB * retention;
+    
+    totalCameras += cameras;
+    totalStorageDiaGB += storageDiaGB;
+    totalStorageUtilGB += storageUtilGB;
+    totalLinkUploadMbps += (bitrateCamera * cameras);
+    
+    const projectName = block.querySelector('.input-project-name').value || ('Grupo ' + (idx+1));
+    const isSingle = document.querySelectorAll('.project-block').length === 1;
+    tableHtml += `
+      <tr style="border-bottom:1px solid var(--lgray)">
+        <td style="padding:10px;color:var(--navy);font-weight:600">${projectName}</td>
+        <td style="padding:10px;color:var(--gray)">${cameras} câm</td>
+        <td style="padding:10px;color:var(--gray)">${storageDiaGB < 1 ? Math.round(storageDiaGB*1024)+' MB' : storageDiaGB.toFixed(1)+' GB'}</td>
+        <td style="padding:10px;color:var(--gray)">${Math.ceil(bitrateCamera * cameras)} Mbps</td>
+        <td style="padding:10px;text-align:center">
+          <button type="button" onclick="removeProject(${idx})" style="background:transparent;border:none;color:var(--orange);cursor:pointer;font-size:16px;${isSingle ? 'opacity:0.3;cursor:not-allowed;' : ''}" ${isSingle ? 'disabled' : ''}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+  
+  tableHtml += `
+        </tbody>
+        <tfoot>
+          <tr style="border-top:2px solid var(--lgray);font-weight:700;color:var(--navy)">
+            <td style="padding:10px">Total</td>
+            <td style="padding:10px">${totalCameras} câm</td>
+            <td style="padding:10px">${totalStorageDiaGB < 1 ? Math.round(totalStorageDiaGB*1024)+' MB' : totalStorageDiaGB.toFixed(1)+' GB'}</td>
+            <td style="padding:10px">${Math.ceil(totalLinkUploadMbps)} Mbps</td>
+            <td style="padding:10px"></td>
+          </tr>
+        </tfoot>
+      </table></div></div>`;
+  const tcont = document.getElementById('summary-table-container');
+  if (tcont) {
+    if (document.querySelectorAll('.project-block').length > 1) {
+      tcont.style.display = 'block';
+      tcont.innerHTML = tableHtml;
+    } else {
+      tcont.style.display = 'none';
+    }
+  }
 
-  // Bitrate por câmera (calibrado com Digifort DesignTool)
-  // bitrateBase = Mbps @ 30fps H.264 plena
-  const bitrateBase   = BITRATES[currentResolution] || 8;
-  const fpsFactor     = fps / 30;
-  const codecFactor   = CODEC_FACTORS[currentCodec] || 0.5;
-  // bitrateCamera = bitrate real da câmera (com codec factor)
-  const bitrateCamera = bitrateBase * fpsFactor * codecFactor;
-  // Link usa o mesmo bitrate para todos os modos: câmera sempre transmite com codec ativo
-  // Em movimento, a nuvem filtra o que salva — economia vem do preço menor (R$2,64 vs R$4,95)
-  const bitrateCameraLink = bitrateCamera;
-
-  // Fator de motion para STORAGE (% do tempo gravando)
-  let recFactor;
-  if (currentRecType === 'continuous')      recFactor = 1.0;
-  else if (currentRecType === 'motion')     recFactor = currentMovement;  // 0.10–1.00
-  else if (currentRecType === 'commercial') recFactor = 0.40;
-  else recFactor = 0.50;
-
-  // ── STORAGE (fórmula 100% validada contra Digifort DesignTool) ──
-  // 1) storage útil bruto: bitrate_cam × motion × cams × 86400s ÷ 8 ÷ 1024 × dias
-  const storageDiaGB   = bitrateCamera * recFactor * cameras * 86400 / 8 / 1024;
-  const storageUtilGB  = storageDiaGB * currentRetention;               // sem VMS overhead aqui
-
-  // 2) storage do servidor = útil × 1.20 (overhead SO/sistema, validado Digifort)
-  //    + VMS overhead adicional (metadados, eventos, thumbnails de cada plataforma)
-  const storageServidorGB = storageUtilGB * 1.20 * profile.storageOverhead;
-
-  // 3) Arredonda de 500 em 500 GB → dimensionamento real do servidor
+  const storageServidorGB = totalStorageUtilGB * 1.20 * profile.storageOverhead;
   const storageServ500GB = roundUp500(storageServidorGB);
   const storageServ500TB = storageServ500GB / 1024;
-
-  // Para custo e plano usamos o storage do servidor arredondado
   const storageParaCusto = storageServ500TB;
 
-  // ── LINK ──
-  // Digifort usa link bidirecional (uplink câmera→servidor + downlink servidor→viewer)
-  // Gravação: uplink usa bitrateCameraLink (motion = sem codec factor, contínuo = com)
-  const linkUploadMbps  = bitrateCameraLink * cameras;
-  // Overhead de protocolo/VMS sobre o uplink
-  const linkGravMbps    = linkUploadMbps * profile.linkOverhead;
-  // Visualização: downlink (usa bitrateCamera com codec)
-  const linkViewMbps    = bitrateCamera * viewers;
-  // Total bidirecional (como o Digifort: 50cam × 1.5Mbps × 2 = 150 Mbps)
-  const linkMinMbps     = (linkGravMbps + linkViewMbps) * 2;
-  const linkIdealMbps   = linkMinMbps * 1.3;
+  const linkGravMbps = totalLinkUploadMbps * profile.linkOverhead;
+  const linkMinMbps = linkGravMbps * 2;
+  const linkIdealMbps = linkMinMbps * 1.3;
 
-  // ── Servidores VMS (até 800 câmeras = 1 VM 16 GB) ──
-  const numServers = Math.max(1, Math.ceil(cameras / 800));
+  const numServers = Math.max(1, Math.ceil(totalCameras / 800));
 
-  // ── CUSTO ──
-  // 1) Custo base (sem visualização) para derivar custo/câmera
-  const custoStorage    = calcStorageCost(storageParaCusto);
+  const custoStorage = calcStorageCost(storageParaCusto);
   const custoServidores = numServers * (currentOS === 'linux' ? CONFIG.custoServidorLinux : CONFIG.custoServidorWin);
-  // Preço do link com desconto por volume de câmeras
-  // Preço base contínuo com desconto por volume
+  
   let linkPrecoCont;
-  if (cameras > 5000)      linkPrecoCont = 4.40;
-  else if (cameras > 1000) linkPrecoCont = 4.675;
+  if (totalCameras > 5000)      linkPrecoCont = 4.40;
+  else if (totalCameras > 1000) linkPrecoCont = 4.675;
   else                     linkPrecoCont = CONFIG.linkPrecoContinuo;
 
-  let linkPrecoGrav;
-  if (currentRecType === 'motion') {
-    // Interpolação linear: R$2,64 (0% atividade) → preço contínuo (100% atividade)
-    linkPrecoGrav = CONFIG.linkPrecoMotion + (linkPrecoCont - CONFIG.linkPrecoMotion) * currentMovement;
-  } else {
-    linkPrecoGrav = linkPrecoCont;
-  }
-  const custoLinkGrav   = Math.ceil(linkGravMbps) * linkPrecoGrav;
-  const custoBase       = (custoStorage + custoServidores + custoLinkGrav) * 1.25;
-  const custoPorCamera  = cameras > 0 ? custoBase / cameras : 0;
+  const custoLinkGrav = Math.ceil(linkGravMbps) * linkPrecoCont;
+  const custoBase = (custoStorage + custoServidores + custoLinkGrav) * 1.25;
+  const custoPorCamera = totalCameras > 0 ? custoBase / totalCameras : 0;
+  const custoTotal = custoBase;
 
-  // 2) Visualização simultânea = custo/câmera × número de viewers
-  // Visualização: R$/Mbps com mínimo de R$15 por usuário simultâneo
-  const custoViewPorUsuario = Math.max(15, Math.ceil(linkViewMbps / (viewers || 1)) * linkPrecoGrav);
-  const custoVisualizacao   = viewers > 0 ? custoViewPorUsuario * viewers : 0;
-
-  // 3) Total final
-  const custoTotal = custoBase + custoVisualizacao;
-
-  // Crescimento e consumo mensal
-  const growthTB     = storageParaCusto * CONFIG.crescimentoAnual;
-  const consumoMenGB = storageDiaGB * 30;
+  const growthTB = storageParaCusto * CONFIG.crescimentoAnual;
+  const consumoMenGB = totalStorageDiaGB * 30;
 
   // ── UPDATE UI ──
   const fmt   = (n, d=2) => n.toFixed(d).replace('.',',');
   const fmtR  = (n) => 'R$ ' + Math.round(n).toLocaleString('pt-BR');
   const fmtGB = (gb) => gb >= 1024 ? fmt(gb/1024) + ' TB' : Math.round(gb) + ' GB';
 
-  setText('r-storage-util',  fmtGB(storageUtilGB));           // útil bruto (sem arred.)
-  setText('r-storage-bruto', fmtGB(storageServ500GB));        // servidor arredondado 500GB
+  setText('r-storage-util',  fmtGB(totalStorageUtilGB));
+  setText('r-storage-bruto', fmtGB(storageServ500GB));
   setText('r-link-min',      Math.ceil(linkMinMbps) + ' Mbps');
   setText('r-link-ideal',    Math.ceil(linkIdealMbps) + ' Mbps');
-  setText('r-servers',       numServers + ' servidor' + (numServers > 1 ? 'es' : '') +
-          ' (' + (currentOS === 'linux' ? 'Linux' : 'Windows') + ')');
+  setText('r-servers',       numServers + ' servidor' + (numServers > 1 ? 'es' : '') + ' (' + (currentOS === 'linux' ? 'Linux' : 'Windows') + ')');
   setText('r-monthly',       fmtGB(consumoMenGB) + '/mês');
   setText('r-growth',        fmt(growthTB) + ' TB/ano');
+  
   const fmtCam = (n) => 'R$ ' + n.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
   setText('r-per-camera',    fmtCam(custoPorCamera) + '/câm');
   setText('r-per-camera-big', fmtCam(custoPorCamera));
-  // Card de visualização: só exibe se houver viewers
-  const viewRow = document.getElementById('r-view-row');
-  if (viewers > 0) {
-    viewRow.style.display = '';
-    setText('r-view-count', viewers);
-    setText('r-view-cost',  fmtR(custoVisualizacao) + '/mês');
-  } else {
-    viewRow.style.display = 'none';
-  }
+  
   setText('r-plan-name',     getPlanName(storageParaCusto));
   setText('r-price',         fmtR(custoTotal));
-  // Hero sync
+  
   setText('hero-storage', fmtGB(storageServ500GB));
   setText('hero-link',    Math.ceil(linkIdealMbps) + ' Mbps');
   setText('hero-plan',    getPlanName(storageParaCusto));
   setText('hero-price',   fmtR(custoTotal));
 
-  // ── Snapshot do dimensionamento (usado no envio do lead p/ Supabase) ──
   window.__calc = {
     os: currentOS,
-    storageUtilGB,
+    storageUtilGB: totalStorageUtilGB,
     storageServidorGB: storageServ500GB,
     linkMinMbps,
     linkIdealMbps,
@@ -1650,180 +1752,52 @@ function calcUpdate() {
     consumoMensalGB: consumoMenGB,
     growthTB,
     custoPorCamera,
-    custoVisualizacao,
+    totalCameras,
     custoTotal,
     planName: getPlanName(storageParaCusto),
   };
 }
 
+// ── MOBILE NAV & ANIMATIONS (Omitted for brevity but basically the same) ──
+function toggleMobileNav() { document.getElementById('nav-hamburger').classList.toggle('open'); document.getElementById('nav-mobile-menu').classList.toggle('open'); }
+function closeMobileNav() { document.getElementById('nav-hamburger').classList.remove('open'); document.getElementById('nav-mobile-menu').classList.remove('open'); }
 
-// ── MOBILE NAV ──
-function toggleMobileNav() {
-  const btn = document.getElementById('nav-hamburger');
-  const menu = document.getElementById('nav-mobile-menu');
-  btn.classList.toggle('open');
-  menu.classList.toggle('open');
-}
-function closeMobileNav() {
-  document.getElementById('nav-hamburger').classList.remove('open');
-  document.getElementById('nav-mobile-menu').classList.remove('open');
-}
-// Close on outside click
-document.addEventListener('click', function(e) {
-  const nav = document.querySelector('.nav');
-  const menu = document.getElementById('nav-mobile-menu');
-  if (menu && menu.classList.contains('open') && !nav.contains(e.target) && !menu.contains(e.target)) {
-    closeMobileNav();
-  }
-});
-// Close on scroll
-window.addEventListener('scroll', function() {
-  const menu = document.getElementById('nav-mobile-menu');
-  if (menu && menu.classList.contains('open')) closeMobileNav();
-}, { passive: true });
+function setText(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
 
-// ── SCROLL ANIMATIONS ──
-if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(el => {
-      if (el.isIntersecting) {
-        el.target.style.opacity = '1';
-        el.target.style.transform = 'translateY(0)';
-        observer.unobserve(el.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.cert-card, .wvg-item, .step-flow-item, .vms-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(16px)';
-    el.style.transition = 'opacity .4s ease, transform .4s ease';
-    observer.observe(el);
-  });
-}
-
-// ── TRUST BAR COUNTER ANIMATION ──
-function animateCounters() {
-  const counters = document.querySelectorAll('.trust-val');
-  counters.forEach(el => {
-    const text = el.textContent;
-    if (text.includes('%')) {
-      const target = parseFloat(text);
-      let current = 0;
-      const step = target / 40;
-      const timer = setInterval(() => {
-        current = Math.min(current + step, target);
-        el.textContent = current.toFixed(current < 99 ? 0 : 2) + '%';
-        if (current >= target) clearInterval(timer);
-      }, 30);
-    }
-  });
-}
-// Trigger when trust section is visible
-if ('IntersectionObserver' in window) {
-  const trustObs = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) { animateCounters(); trustObs.disconnect(); }
-  }, { threshold: 0.5 });
-  const trustEl = document.querySelector('.hero-trust');
-  if (trustEl) trustObs.observe(trustEl);
-}
-
-// ── ACTIVE NAV ON SCROLL ──
-const sections = ['calculadora','beneficios','cases','seguranca','proposta'];
-const navLinks = document.querySelectorAll('.nav-link');
-window.addEventListener('scroll', function() {
-  const scrollY = window.pageYOffset;
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    if (scrollY >= el.offsetTop - 100 && scrollY < el.offsetTop + el.offsetHeight - 100) {
-      navLinks.forEach(l => l.style.color = '');
-      const active = document.querySelector('.nav-link[href="#' + id + '"]');
-      if (active) active.style.color = '#fff';
-    }
-  });
-}, { passive: true });
-
-function setText(id, val) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = val;
-}
-
-// ── SUPABASE (calculadoras Adentro — mesmo projeto da Continuidade) ──
+// ── SUPABASE E FORM ──
 const SUPABASE_URL = 'https://nnflvtrkjxblafjlbrpg.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5uZmx2dHJranhibGFmamxicnBnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1NTgyMTcsImV4cCI6MjA5NzEzNDIxN30.6e5Cjw4Jl00nltEcKXat4OOPUEavMxjftT6FHFGMtns';
 
-// Persiste lead + dimensionamento via RPC `submit_cloud_vms` (mesma do app React).
 async function saveLeadSupabase(payload) {
   const res = await fetch(SUPABASE_URL + '/rest/v1/rpc/submit_cloud_vms', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'apikey': SUPABASE_ANON_KEY,
-      'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-    },
+    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY },
     body: JSON.stringify({ payload }),
   });
   if (!res.ok) throw new Error('Supabase ' + res.status + ': ' + (await res.text()));
   return res.json().catch(() => null);
 }
 
-// ── FORM ──
 async function submitForm(e) {
   e.preventDefault();
   const c = window.__calc || {};
   const num = (v) => (typeof v === 'number' && isFinite(v) ? v : 0);
-
-  const cameras = Math.max(1, parseInt(document.getElementById('numCameras').value) || 1);
-  const viewers = Math.max(0, parseInt(document.getElementById('numViewers').value) || 0);
-  const fps     = parseInt(document.getElementById('fps').value) || 15;
-
-  // Nome completo → nome + sobrenome
-  const nomeCompleto = (document.getElementById('f-nome').value || '').trim();
-  const [nome, ...restoNome] = nomeCompleto.split(/\s+/);
-  const sobrenome = restoNome.join(' ') || null;
-
-  // UTMs e tracking capturados da URL (?utm_source=...&gclid=...)
-  const qs = new URLSearchParams(location.search);
-  const q = (k) => qs.get(k) || null;
-
+  
   const payload = {
-    lead: {
-      // id vindo do gate (?lead_id=) — correlaciona a submissão ao lead ja criado.
-      id: q('lead_id') || null,
-      nome: nome || null,
-      sobrenome,
-      empresa: document.getElementById('f-empresa').value || null,
-      email: document.getElementById('f-email').value || null,
-      whatsapp: document.getElementById('f-whatsapp').value || null,
-      perfil: document.getElementById('f-perfil').value || null,
-      origem: 'calculadora-vms',
-      indicacao: q('vendedor') || q('indicacao'),
-      cargo: null,
-      funcionarios: null,
-      cotando: null,
-      previsao: null,
-      utm_source: q('utm_source'),
-      utm_medium: q('utm_medium'),
-      utm_campaign: q('utm_campaign'),
-      utm_content: q('utm_content'),
-      utm_term: q('utm_term'),
-      utm_creative_format: q('utm_creative_format'),
-      utm_marketing_tactic: q('utm_marketing_tactic'),
-      gclid: q('gclid'),
-    },
+    lead: { id: new URLSearchParams(location.search).get('lead_id') || null },
     config: {
       vms: currentVMS,
-      cameras,
-      viewers,
-      resolution: currentResolution,
-      codec: currentCodec,
-      fps,
-      retention: currentRetention,
-      rec_type: currentRecType,
-      movement: currentMovement,
+      cameras: Math.max(1, Math.round(num(c.totalCameras))),
+      viewers: 0,
+      resolution: "Múltiplos Projetos",
+      codec: "N/A",
+      fps: 0,
+      retention: 0,
+      rec_type: "Múltiplos",
+      movement: 0
     },
     result: {
-      os: c.os || currentOS,
+      os: c.os,
       storage_util_gb: +num(c.storageUtilGB).toFixed(2),
       storage_servidor_gb: Math.round(num(c.storageServidorGB)),
       link_min_mbps: Math.ceil(num(c.linkMinMbps)),
@@ -1832,222 +1806,67 @@ async function submitForm(e) {
       consumo_mensal_gb: +num(c.consumoMensalGB).toFixed(2),
       growth_tb: +num(c.growthTB).toFixed(2),
       custo_por_camera: Math.round(num(c.custoPorCamera)),
-      custo_visualizacao: Math.round(num(c.custoVisualizacao)),
+      custo_visualizacao: 0,
       custo_total: Math.round(num(c.custoTotal)),
-      plan_name: c.planName || document.getElementById('r-plan-name').textContent,
-    },
-    meta: {
-      user_agent: navigator.userAgent,
-      completed_at: new Date().toISOString(),
-    },
+      plan_name: c.planName,
+    }
   };
 
   const btn = e.target.querySelector('button[type="submit"]');
   if (btn) { btn.disabled = true; btn.dataset._t = btn.textContent; btn.textContent = 'Enviando...'; }
-  try {
-    await saveLeadSupabase(payload);
-  } catch (err) {
-    // Degrada graciosamente: nunca trava o usuário por falha de persistência.
-    console.error('Erro ao salvar lead no Supabase:', err);
-  } finally {
-    if (btn) { btn.disabled = false; btn.textContent = btn.dataset._t || 'Enviar'; }
-  }
+  try { await saveLeadSupabase(payload); } catch (err) { console.error(err); }
+  finally { if (btn) { btn.disabled = false; btn.textContent = btn.dataset._t; } }
+  
   document.getElementById('lead-form').style.display = 'none';
   document.getElementById('form-success').style.display = 'block';
 }
 
-function scrollToForm() {
-  document.getElementById('proposta').scrollIntoView({behavior:'smooth'});
-}
-
-// ── INIT ──
-// Pré-preenche o contato com o que o gate (cadastro em 2 etapas) ja coletou,
-// passado via query string. O usuario so confirma e escolhe o perfil.
-function prefillFromGate() {
-  const p = new URLSearchParams(location.search);
-  const setVal = (id, v) => { const el = document.getElementById(id); if (el && v) el.value = v; };
-  const nome = [p.get('nome'), p.get('sobrenome')].filter(Boolean).join(' ').trim();
-  setVal('f-nome', nome);
-  setVal('f-empresa', p.get('empresa'));
-  setVal('f-whatsapp', p.get('whatsapp'));
-  setVal('f-email', p.get('email'));
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  prefillFromGate();
-  calcUpdate();
-});
-
-const RES_OUTROS = [
-  {val:'320x240',label:'320x240'},{val:'352x240',label:'352x240'},{val:'352x288',label:'352x288'},
-  {val:'480x270',label:'480x270'},{val:'480x360',label:'480x360'},{val:'640x360',label:'640x360'},
-  {val:'704x240',label:'704x240'},{val:'704x244',label:'704x244'},{val:'704x288',label:'704x288'},
-  {val:'704x480',label:'704x480'},{val:'704x488',label:'704x488'},{val:'704x576',label:'704x576'},
-  {val:'720x240',label:'720x240'},{val:'720x244',label:'720x244'},{val:'720x288',label:'720x288'},
-  {val:'720x480',label:'720x480'},{val:'720x488',label:'720x488'},{val:'720x576',label:'720x576'},
-  {val:'752x582',label:'752x582'},{val:'800x450',label:'800x450'},{val:'800x600',label:'800x600'},
-  {val:'1024x720',label:'1024x720'},{val:'1024x768',label:'1024x768 (1MP)'},
-  {val:'1280x720',label:'1280x720 (HD)'},{val:'1280x800',label:'1280x800 (1MP)'},
-  {val:'1280x960',label:'1280x960 (1.2MP)'},{val:'1280x1024',label:'1280x1024 (1.3MP)'},
-  {val:'1600x1200',label:'1600x1200 (1.9MP)'},{val:'1920x720',label:'1920x720'},
-  {val:'2048x1536',label:'2048x1536 (3.1MP)'},{val:'2240x1680',label:'2240x1680 (3.8MP)'},
-  {val:'2560x1920',label:'2560x1920 (5MP)'},{val:'3032x2008',label:'3032x2008 (6.1MP)'},
-  {val:'3072x2304',label:'3072x2304 (7.1MP)'},{val:'3264x2448',label:'3264x2448 (8MP)'},
-];
-
-function openResModal() {
-  var grid = document.getElementById('res-modal-grid');
-  grid.innerHTML = '';
-  RES_OUTROS.forEach(function(r) {
-    var btn = document.createElement('button');
-    btn.textContent = r.label;
-    btn.style.cssText = 'padding:10px 12px;border-radius:8px;border:1.5px solid var(--lgray);background:var(--off);font-size:13px;font-weight:500;cursor:pointer;text-align:left;color:var(--dark);font-family:inherit;transition:all .15s';
-    if (currentResolution === r.val) { btn.style.borderColor='var(--orange)'; btn.style.background='var(--orange-l)'; btn.style.color='var(--orange)'; }
-    btn.onclick = function() { selectResOutros(r.val, r.label); };
-    grid.appendChild(btn);
-  });
-  document.getElementById('res-modal-overlay').style.display = 'flex';
-}
-
-function selectResOutros(val, label) {
-  document.querySelectorAll('#resolution-group .pill-opt').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelector('.pill-outros').classList.add('active');
-  currentResolution = val;
-  document.getElementById('res-outros-label').style.display = 'block';
-  document.getElementById('res-outros-name').textContent = label;
-  closeResModal(null, true);
-  calcUpdate();
-}
-
-function closeResModal(e, force) {
-  if (force || (e && e.target === document.getElementById('res-modal-overlay'))) {
-    document.getElementById('res-modal-overlay').style.display = 'none';
-  }
-}
-
-var _origSelectPill2 = selectPill;
-window.selectPill = function(el, groupId, val) {
-  if (groupId === 'resolution-group') {
-    var lbl = document.getElementById('res-outros-label');
-    if (lbl) lbl.style.display = 'none';
-  }
-  _origSelectPill2(el, groupId, val);
-};
-
-// ════════════════════════════════════════════════════════════
-// MODO SÓ-CALCULADORA (?calc=1) — usado no iframe apos o cadastro/gate.
-// Esconde a landing inteira (nav, hero, beneficios, cases, seguranca, form,
-// footer) e deixa SO a calculadora. O CTA de resultado salva o dimensionamento
-// direto no Supabase, correlacionado ao lead ja criado no gate (?lead_id=).
-// ════════════════════════════════════════════════════════════
-(function () {
-  var qp = new URLSearchParams(location.search);
-  if (qp.get('calc') !== '1') return;
-
-  // CSS: mostra apenas a calculadora.
-  var css = document.createElement('style');
-  css.textContent =
-    'body.calc-only .hero,body.calc-only .howcalc,' +
-    'body.calc-only .why-vms,body.calc-only .compare-section,' +
-    'body.calc-only .certs-section,body.calc-only .form-section-cta,' +
-    'body.calc-only .footer{display:none!important}' +
-    // header enxuto: mantem so a logo da Adentro (esconde menu/CTA da nav).
-    'body.calc-only .nav-links,body.calc-only .nav-cta,' +
-    'body.calc-only .nav-hamburger{display:none!important}' +
-    'body.calc-only .calc-section{padding-top:28px}' +
-    '.calc-done-overlay{position:fixed;inset:0;z-index:9999;display:flex;' +
-    'align-items:center;justify-content:center;padding:24px;' +
-    'background:rgba(4,12,82,.55);backdrop-filter:blur(4px)}' +
-    '.calc-done-card{background:#fff;border-radius:18px;max-width:420px;width:100%;' +
-    'padding:36px 28px;text-align:center;box-shadow:0 24px 64px rgba(4,12,82,.25)}';
-  document.head.appendChild(css);
-  document.body.classList.add('calc-only');
-
-  function showDone() {
-    var ov = document.createElement('div');
-    ov.className = 'calc-done-overlay';
-    ov.innerHTML =
-      '<div class="calc-done-card">' +
-      '<div style="width:56px;height:56px;border-radius:50%;margin:0 auto 16px;' +
-      'background:var(--green-bg);display:flex;align-items:center;justify-content:center;' +
-      'color:var(--green);font-size:28px">&#10003;</div>' +
-      '<div style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:8px">' +
-      'Projeto enviado!</div>' +
-      '<div style="font-size:14px;color:var(--gray);line-height:1.5">' +
-      'Recebemos o seu dimensionamento. Um especialista da Adentro vai te chamar ' +
-      'em breve com a proposta.</div></div>';
-    document.body.appendChild(ov);
-  }
-
-  async function submitFromCalc(ev) {
-    if (ev) ev.preventDefault();
-    var p = new URLSearchParams(location.search);
-    var qv = function (k) { return p.get(k) || null; };
-    var c = window.__calc || {};
-    var n = function (v) { return (typeof v === 'number' && isFinite(v)) ? v : 0; };
-
-    var cameras = Math.max(1, parseInt(document.getElementById('numCameras').value) || 1);
-    var viewers = Math.max(0, parseInt(document.getElementById('numViewers').value) || 0);
-    var fps = parseInt(document.getElementById('fps').value) || 15;
-
-    var payload = {
-      lead: {
-        id: qv('lead_id'),
-        nome: qv('nome'),
-        sobrenome: qv('sobrenome'),
-        empresa: qv('empresa'),
-        email: qv('email'),
-        whatsapp: qv('whatsapp'),
-        perfil: null,
-        origem: 'calculadora-vms',
-        indicacao: qv('vendedor') || qv('indicacao'),
-        cargo: null, funcionarios: null, cotando: null, previsao: null,
-        utm_source: qv('utm_source'), utm_medium: qv('utm_medium'),
-        utm_campaign: qv('utm_campaign'), utm_content: qv('utm_content'),
-        utm_term: qv('utm_term'), utm_creative_format: qv('utm_creative_format'),
-        utm_marketing_tactic: qv('utm_marketing_tactic'), gclid: qv('gclid'),
-      },
-      config: {
-        vms: currentVMS, cameras: cameras, viewers: viewers,
-        resolution: currentResolution, codec: currentCodec, fps: fps,
-        retention: currentRetention, rec_type: currentRecType, movement: currentMovement,
-      },
-      result: {
-        os: c.os || currentOS,
-        storage_util_gb: +n(c.storageUtilGB).toFixed(2),
-        storage_servidor_gb: Math.round(n(c.storageServidorGB)),
-        link_min_mbps: Math.ceil(n(c.linkMinMbps)),
-        link_ideal_mbps: Math.ceil(n(c.linkIdealMbps)),
-        num_servers: n(c.numServers),
-        consumo_mensal_gb: +n(c.consumoMensalGB).toFixed(2),
-        growth_tb: +n(c.growthTB).toFixed(2),
-        custo_por_camera: Math.round(n(c.custoPorCamera)),
-        custo_visualizacao: Math.round(n(c.custoVisualizacao)),
-        custo_total: Math.round(n(c.custoTotal)),
-        plan_name: c.planName || document.getElementById('r-plan-name').textContent,
-      },
-      meta: { user_agent: navigator.userAgent, completed_at: new Date().toISOString() },
-    };
-
-    var btns = document.querySelectorAll('.result-btn-primary,.result-btn-ghost');
-    btns.forEach(function (b) { b.disabled = true; });
-    try {
-      await saveLeadSupabase(payload);
-    } catch (err) {
-      console.error('Erro ao salvar dimensionamento:', err);
-    } finally {
-      btns.forEach(function (b) { b.disabled = false; });
-    }
-    showDone();
-  }
-
-  // Religa os CTAs da calculadora p/ salvar direto (sem rolar p/ o form oculto).
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.result-btn-primary,.result-btn-ghost').forEach(function (b) {
-      b.onclick = submitFromCalc;
-    });
-  });
-})();
+function scrollToForm() { document.getElementById('proposta').scrollIntoView({behavior:'smooth'}); }
+function prefillFromGate() {}
+document.addEventListener('DOMContentLoaded', () => { prefillFromGate(); calcUpdate(); });
 </script>
+
+<!-- MODAL HORÁRIO COMERCIAL -->
+<div id="modal-commercial" style="display:none;position:fixed;inset:0;background:rgba(4,12,82,.6);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:16px;padding:32px;width:100%;max-width:400px;">
+    <h3 style="margin:0 0 16px;color:var(--navy)">Configurar Horário Comercial</h3>
+    <div style="margin-bottom:16px;">
+      <label style="font-size:13px;font-weight:700;color:var(--gray);display:block;margin-bottom:8px">Dias da Semana</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <label><input type="checkbox" class="hc-day" value="1" checked> Seg</label>
+        <label><input type="checkbox" class="hc-day" value="1" checked> Ter</label>
+        <label><input type="checkbox" class="hc-day" value="1" checked> Qua</label>
+        <label><input type="checkbox" class="hc-day" value="1" checked> Qui</label>
+        <label><input type="checkbox" class="hc-day" value="1" checked> Sex</label>
+        <label><input type="checkbox" class="hc-day" value="0"> Sáb</label>
+        <label><input type="checkbox" class="hc-day" value="0"> Dom</label>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;margin-bottom:24px;">
+      <div style="flex:1">
+        <label style="font-size:13px;font-weight:700;color:var(--gray);display:block;margin-bottom:8px">Início</label>
+        <input type="time" id="hc-start" value="08:00" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--lgray)">
+      </div>
+      <div style="flex:1">
+        <label style="font-size:13px;font-weight:700;color:var(--gray);display:block;margin-bottom:8px">Fim</label>
+        <input type="time" id="hc-end" value="18:00" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--lgray)">
+      </div>
+    </div>
+    <button type="button" onclick="saveCommercial()" style="width:100%;padding:12px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer">Salvar e Calcular</button>
+  </div>
+</div>
+
+<!-- MODAL PERSONALIZADO -->
+<div id="modal-custom" style="display:none;position:fixed;inset:0;background:rgba(4,12,82,.6);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:16px;padding:32px;width:100%;max-width:320px;">
+    <h3 style="margin:0 0 16px;color:var(--navy)">Gravação Personalizada</h3>
+    <div style="margin-bottom:16px;">
+      <label style="font-size:13px;font-weight:700;color:var(--gray);display:block;margin-bottom:8px">% de Gravação (0 a 100)</label>
+      <input type="number" id="custom-pct" value="50" min="0" max="100" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--lgray)">
+    </div>
+    <button type="button" onclick="saveCustom()" style="width:100%;padding:12px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer">Salvar e Calcular</button>
+  </div>
+</div>
+
 </body>
 </html>

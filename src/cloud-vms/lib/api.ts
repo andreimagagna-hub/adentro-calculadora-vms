@@ -1,5 +1,5 @@
 import { supabase } from "./supabase";
-import { calculate, type CalcInput, type CalcResult } from "./calc";
+import { calculateGroups, type GroupInput, type CalcResult } from "./calc";
 
 /* ───────────── LEAD (cadastro) ───────────── */
 export interface Lead {
@@ -40,9 +40,14 @@ export type SaveResult =
 
 const SAVE_ENDPOINT = import.meta.env.VITE_SAVE_ENDPOINT ?? "api/salvar.php";
 
-/** Monta o payload completo (lead + configuração + dimensionamento calculado). */
-export function buildPayload(lead: Lead, input: CalcInput, result?: CalcResult) {
-  const r = result ?? calculate(input);
+/** Monta o payload completo (lead + configuração + dimensionamento calculado).
+ *  Multi-grupo: `config.groups` carrega o array completo; as colunas planas de
+ *  `config` recebem agregados/representativos (câmeras = soma; resolução/codec/
+ *  fps/retenção/tipo/movimento do 1º grupo) para compat com o schema existente. */
+export function buildPayload(lead: Lead, vms: string, groups: GroupInput[], result?: CalcResult) {
+  const r = result ?? calculateGroups(vms, groups);
+  const totalCameras = groups.reduce((s, g) => s + Math.max(1, g.cameras || 1), 0);
+  const g0 = groups[0];
   return {
     lead: {
       id: lead.id ?? null,
@@ -68,15 +73,26 @@ export function buildPayload(lead: Lead, input: CalcInput, result?: CalcResult) 
       gclid: lead.gclid ?? null,
     },
     config: {
-      vms: input.vms,
-      cameras: input.cameras,
-      viewers: input.viewers,
-      resolution: input.resolution,
-      codec: input.codec,
-      fps: input.fps,
-      retention: input.retention,
-      rec_type: input.recType,
-      movement: input.movement,
+      vms,
+      cameras: totalCameras,
+      viewers: null,
+      resolution: g0?.resolution ?? null,
+      codec: g0?.codec ?? null,
+      fps: g0?.fps ?? null,
+      retention: g0?.retention ?? null,
+      rec_type: g0?.recType ?? null,
+      movement: g0?.movement ?? null,
+      groups: groups.map((g) => ({
+        name: g.name,
+        cameras: g.cameras,
+        resolution: g.resolution,
+        codec: g.codec,
+        fps: g.fps,
+        retention: g.retention,
+        rec_type: g.recType,
+        movement: g.movement,
+        rec_pct: g.recPct,
+      })),
     },
     result: {
       os: r.os,
@@ -153,10 +169,11 @@ export async function saveVmsLeadOnly(lead: Lead): Promise<SaveResult> {
  */
 export async function saveVmsLead(
   lead: Lead,
-  input: CalcInput,
+  vms: string,
+  groups: GroupInput[],
   result?: CalcResult,
 ): Promise<SaveResult> {
-  const payload = buildPayload(lead, input, result);
+  const payload = buildPayload(lead, vms, groups, result);
 
   if (supabase) {
     try {
@@ -182,6 +199,58 @@ export async function saveVmsLead(
   } catch (err) {
     // Sem backend configurado: registra e segue (dev).
     console.info("[Cloud VMS] cadastro capturado (sem backend):", payload);
+    return { ok: false, error: (err as Error).message };
+  }
+}
+
+/* ───────────── BUSCAR LEAD POR E-MAIL (login direto) ───────────── */
+export type FindLeadResult =
+  | { ok: true; lead: Lead }
+  | { ok: false; error: string };
+
+/**
+ * Busca um lead já cadastrado pelo e-mail, via RPC `find_cloud_vms_lead_by_email`.
+ * Permite que o usuário pule o cadastro se já acessou antes.
+ * Degrada graciosamente: sem Supabase, retorna erro.
+ */
+export async function findLeadByEmail(email: string): Promise<FindLeadResult> {
+  if (!supabase) {
+    return { ok: false, error: "Supabase não configurado." };
+  }
+  try {
+    const { data, error } = await supabase.rpc("find_cloud_vms_lead_by_email", {
+      p_email: email.trim().toLowerCase(),
+    });
+    if (error) throw error;
+    if (!data) return { ok: false, error: "E-mail não encontrado." };
+    return {
+      ok: true,
+      lead: {
+        id: data.id ?? undefined,
+        nome: data.nome ?? undefined,
+        sobrenome: data.sobrenome ?? undefined,
+        empresa: data.empresa ?? undefined,
+        email: data.email ?? undefined,
+        whatsapp: data.whatsapp ?? undefined,
+        cargo: data.cargo ?? undefined,
+        funcionarios: data.funcionarios ?? undefined,
+        cotando: data.cotando ?? undefined,
+        previsao: data.previsao ?? undefined,
+        perfil: data.perfil ?? undefined,
+        origem: data.origem ?? undefined,
+        indicacao: data.indicacao ?? undefined,
+        utm_source: data.utm_source ?? undefined,
+        utm_medium: data.utm_medium ?? undefined,
+        utm_campaign: data.utm_campaign ?? undefined,
+        utm_content: data.utm_content ?? undefined,
+        utm_term: data.utm_term ?? undefined,
+        utm_creative_format: data.utm_creative_format ?? undefined,
+        utm_marketing_tactic: data.utm_marketing_tactic ?? undefined,
+        gclid: data.gclid ?? undefined,
+      },
+    };
+  } catch (err) {
+    console.error("Erro ao buscar lead por e-mail:", err);
     return { ok: false, error: (err as Error).message };
   }
 }

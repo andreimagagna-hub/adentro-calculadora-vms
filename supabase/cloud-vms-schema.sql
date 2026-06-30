@@ -91,9 +91,15 @@ create table if not exists public.cloud_vms_submissions (
   custo_total         numeric,
   plan_name           text,
 
+  -- multi-grupo: array completo dos "Grupos de Câmeras" desta submissão
+  groups              jsonb,
+
   user_agent          text,
   completed_at        timestamptz not null default now()
 );
+
+-- Coluna nova em bases já existentes (idempotente).
+alter table public.cloud_vms_submissions add column if not exists groups jsonb;
 
 create index if not exists cloud_vms_submissions_lead_id_idx
   on public.cloud_vms_submissions (lead_id);
@@ -205,7 +211,7 @@ begin
   end if;
 
   insert into public.cloud_vms_submissions (
-    lead_id, vms, cameras, viewers, resolution, codec, fps, retention, rec_type, movement,
+    lead_id, vms, cameras, viewers, resolution, codec, fps, retention, rec_type, movement, groups,
     os, storage_util_gb, storage_servidor_gb, link_min_mbps, link_ideal_mbps, num_servers,
     consumo_mensal_gb, growth_tb, custo_por_camera, custo_visualizacao, custo_total, plan_name,
     user_agent, completed_at
@@ -220,6 +226,7 @@ begin
     nullif(v_cfg->>'retention','')::int,
     v_cfg->>'rec_type',
     nullif(v_cfg->>'movement','')::numeric,
+    v_cfg->'groups',
     v_res->>'os',
     nullif(v_res->>'storage_util_gb','')::numeric,
     nullif(v_res->>'storage_servidor_gb','')::numeric,

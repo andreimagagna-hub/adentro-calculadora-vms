@@ -1,0 +1,219 @@
+/* ============================================================
+   Calculadora Cloud VMS — design portado do HTML aprovado
+   (public/calculadora-vms.html). Escopado em .vmscalc para não
+   vazar para o resto do app. Mantém classes/estrutura idênticas.
+   ============================================================ */
+.vmscalc {
+  --orange:#EB7342;--orange-d:#ED501D;--orange-l:#FDF1EA;
+  --navy:#0B0D31;--navy-l:#0A1660;
+  --white:#FFFFFF;--off:#FAFAFB;--lgray:#ECECEC;
+  --gray:#6B7280;--dark:#0B0D31;
+  --green:#16A34A;--green-bg:#E8F5E9;--green-txt:#1B5E20;
+  --blue:#3B82F6;--amber:#F2A24E;
+  --radius:10px;--radius-lg:14px;--radius-xl:20px;
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+  background:var(--white);color:var(--dark);line-height:1.6;font-size:15px;
+  min-height:100vh;
+}
+.vmscalc *,.vmscalc *::before,.vmscalc *::after{box-sizing:border-box;margin:0;padding:0}
+.vmscalc button{font-family:inherit}
+.vmscalc{overflow-x:hidden}
+/* Itens de grid/flex precisam poder encolher (senão inputs estouram no mobile) */
+.calc-grid{min-width:0}
+.calc-grid>*{min-width:0}
+
+/* Header */
+.vmscalc-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--lgray)}
+.vmscalc-header-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.vmscalc-back{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--gray);background:transparent;border:0;cursor:pointer}
+.vmscalc-back:hover{color:var(--orange)}
+
+.vmscalc-section{max-width:1200px;margin:0 auto;padding:32px 24px 64px}
+.vmscalc-intro-title{font-size:clamp(22px,3vw,30px);font-weight:700;color:var(--navy);letter-spacing:-.3px}
+.vmscalc-intro-sub{font-size:15px;color:var(--gray);margin-top:4px;margin-bottom:32px}
+
+/* Step 1 — VMS selector */
+.step-block{margin-bottom:40px}
+.step-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.step-num{width:36px;height:36px;background:linear-gradient(135deg,var(--orange),#EB7342);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 4px 12px rgba(235,115,66,.35)}
+.step-title{font-size:21px;font-weight:700;color:var(--navy);letter-spacing:-.3px}
+.step-sub{font-size:13px;color:var(--gray);margin-top:2px}
+.vms-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.vms-card{border:2px solid var(--lgray);border-radius:14px;padding:20px 12px 16px;cursor:pointer;text-align:center;transition:all .22s;background:#fff;position:relative;overflow:hidden;min-width:0}
+.vms-card-name{word-break:break-word}
+.vms-card:hover{border-color:var(--orange);box-shadow:0 8px 24px rgba(235,115,66,.15);transform:translateY(-2px)}
+.vms-card.selected{border-color:var(--orange);background:var(--orange-l);box-shadow:0 8px 24px rgba(235,115,66,.22);transform:translateY(-2px)}
+.vms-card-logo{height:40px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;overflow:hidden;transition:transform .22s}
+.vms-card:hover .vms-card-logo{transform:scale(1.07)}
+.vms-card-name{font-size:12px;font-weight:600;color:var(--dark);line-height:1.3}
+.vms-card .check{width:22px;height:22px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;margin:8px auto 0;opacity:0;transition:all .2s;box-shadow:0 4px 10px rgba(235,115,66,.4);color:#fff}
+.vms-card.selected .check{opacity:1}
+.vms-msg{display:flex;padding:12px 16px;background:var(--green-bg);border:1px solid rgba(22,163,74,.3);border-radius:var(--radius);font-size:13px;color:var(--green-txt);align-items:center;gap:10px}
+
+/* Step 2 — grade calculadora */
+.calc-grid{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
+.calc-form-panel{background:var(--off);border:1px solid var(--lgray);border-radius:var(--radius-xl);padding:32px;box-shadow:0 4px 24px rgba(4,12,82,.06)}
+.calc-form-panel + .calc-form-panel{margin-top:20px}
+
+.form-section{margin-bottom:24px}
+.form-section:last-child{margin-bottom:0}
+.form-section-title{font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.form-section-num{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--orange),#EB7342);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(235,115,66,.3)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* Cabeçalho do grupo (nome + remover) */
+.group-head{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.group-name-input{flex:1 1 0;min-width:0;width:100%;padding:10px 14px;border-radius:10px;border:1.5px solid var(--lgray);font-size:15px;font-weight:600;color:var(--navy);font-family:inherit;outline:none;background:#fff}
+.group-name-input:focus{border-color:var(--orange)}
+.group-remove{flex-shrink:0;font-size:12px;font-weight:700;color:var(--orange);background:var(--orange-l);border:0;border-radius:8px;padding:8px 12px;cursor:pointer}
+.group-remove:hover{background:var(--orange);color:#fff}
+
+/* Contador de câmeras */
+.cam-counter{display:flex;align-items:center;gap:10px}
+.cam-btn{width:38px;height:38px;border-radius:10px;border:2px solid var(--lgray);background:#fff;cursor:pointer;font-size:20px;font-weight:500;display:flex;align-items:center;justify-content:center;color:var(--navy);transition:all .18s;flex-shrink:0}
+.cam-btn:hover{border-color:var(--orange);color:var(--orange)}
+.cam-input{flex:1;min-width:0;text-align:center;font-size:18px;font-weight:700;color:var(--navy);border:1.5px solid var(--lgray);border-radius:8px;padding:8px;background:#fff;font-family:inherit;outline:none;-moz-appearance:textfield}
+.cam-input::-webkit-inner-spin-button{-webkit-appearance:none}
+.cam-input:focus{border-color:var(--orange)}
+.cam-unit{font-size:12px;color:var(--gray);white-space:nowrap}
+
+/* Pills (resolução / codec) */
+.pill-group{display:flex;flex-wrap:wrap;gap:6px}
+.pill-opt{padding:7px 16px;border-radius:20px;border:1.5px solid var(--lgray);font-size:12px;font-weight:600;color:var(--gray);cursor:pointer;transition:all .18s;background:#fff;white-space:nowrap}
+.pill-opt:hover{border-color:var(--orange);color:var(--orange);background:rgba(235,115,66,.05);transform:translateY(-1px)}
+.pill-opt.active{border-color:var(--orange);background:linear-gradient(135deg,var(--orange),#EB7342);color:#fff;box-shadow:0 4px 12px rgba(235,115,66,.3)}
+
+/* Sliders (FPS / retenção / movimento) */
+.slider-row{display:flex;align-items:center;gap:12px;margin-top:4px}
+.slider-row input[type=range]{flex:1;min-width:0;accent-color:var(--orange);cursor:pointer}
+.slider-val{display:flex;align-items:center;gap:4px;background:var(--orange-l);border:1px solid rgba(235,115,66,.3);border-radius:8px;padding:3px 8px}
+.slider-val input{width:48px;font-size:15px;font-weight:700;color:var(--navy);border:none;background:transparent;outline:none;text-align:right;font-family:inherit;-moz-appearance:textfield}
+.slider-val input::-webkit-inner-spin-button{-webkit-appearance:none}
+.slider-val .unit{font-size:13px;font-weight:600;color:var(--orange)}
+.slider-ticks{display:flex;justify-content:space-between;font-size:10px;color:var(--gray);margin-top:4px}
+
+/* Tipo de gravação */
+.rec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.rec-btn{border:2px solid var(--lgray);border-radius:12px;padding:16px 8px 12px;cursor:pointer;background:#fff;text-align:center;transition:all .2s}
+.rec-btn:hover{border-color:var(--orange);background:rgba(235,115,66,.04);transform:translateY(-2px);box-shadow:0 6px 18px rgba(235,115,66,.1)}
+.rec-btn.active{border-color:var(--orange);background:var(--orange-l);box-shadow:0 6px 18px rgba(235,115,66,.18)}
+.rec-btn-icon-wrap{width:44px;height:44px;border-radius:12px;background:var(--off);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;transition:all .2s;color:var(--gray)}
+.rec-btn.active .rec-btn-icon-wrap{background:rgba(235,115,66,.15);color:var(--orange)}
+.rec-btn:hover .rec-btn-icon-wrap{color:var(--orange)}
+.rec-btn-label{font-size:11px;font-weight:600;color:var(--gray);line-height:1.3;transition:color .2s}
+.rec-btn.active .rec-btn-label{color:var(--navy);font-weight:700}
+.rec-note{font-size:12px;color:var(--gray);margin-top:10px}
+
+/* Toolbar recolher/expandir */
+.groups-toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:12px;color:var(--gray)}
+.groups-toolbar button{background:#fff;border:1.5px solid var(--lgray);color:var(--navy);font-weight:600;font-size:12px;border-radius:8px;padding:6px 12px;cursor:pointer}
+.groups-toolbar button:hover{border-color:var(--orange);color:var(--orange)}
+
+/* Recolher grupo */
+.group-toggle{flex-shrink:0;width:28px;height:28px;border-radius:8px;border:1.5px solid var(--lgray);background:#fff;color:var(--gray);cursor:pointer;display:flex;align-items:center;justify-content:center;transform:rotate(-90deg);transition:transform .2s,border-color .15s}
+.group-toggle:hover{border-color:var(--orange);color:var(--orange)}
+.is-collapsed .group-toggle{transform:rotate(0deg)}
+.group-head-cost{margin-left:auto;font-size:15px;font-weight:800;color:var(--orange);white-space:nowrap}
+.group-head-cost small{font-size:11px;font-weight:600;color:var(--gray);margin-left:2px}
+.is-collapsed .group-head{margin-bottom:0}
+.group-collapsed-summary{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:14px;padding-top:14px;border-top:1px solid var(--lgray);font-size:13px;color:var(--gray)}
+.group-collapsed-summary strong{color:var(--navy)}
+/* quando recolhido, custo da linha cede espaço ao nome via margin-left:auto no head */
+.is-collapsed .group-name-input{flex:0 1 auto}
+
+/* + Adicionar Grupo */
+.add-group-btn{width:100%;margin-top:20px;padding:16px;background:var(--off);border:2px dashed var(--orange);color:var(--orange);border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s}
+.add-group-btn:hover{background:var(--orange-l)}
+
+/* Tabela-resumo */
+.summary-card{background:#fff;border-radius:12px;border:1px solid var(--lgray);padding:16px;margin-top:28px}
+.summary-card h3{font-size:16px;color:var(--navy);margin-bottom:12px}
+.summary-table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+.summary-table th{padding:10px;font-weight:700;color:var(--gray);border-bottom:2px solid var(--lgray)}
+.summary-table td{padding:10px;color:var(--gray);border-bottom:1px solid var(--lgray)}
+.summary-table td.name{color:var(--navy);font-weight:600}
+.summary-table .act{text-align:center}
+.summary-table .act button{background:transparent;border:0;color:var(--orange);cursor:pointer;font-size:16px;line-height:1}
+.summary-table td.cost{color:var(--orange);font-weight:700}
+.summary-table tfoot td{border-top:2px solid var(--lgray);border-bottom:0;color:var(--navy);font-weight:700}
+.summary-table tfoot td.cost{color:var(--orange)}
+.share-cell{display:flex;align-items:center;gap:8px}
+.share-bar{flex:1;min-width:60px;height:6px;border-radius:4px;background:var(--lgray);overflow:hidden}
+.share-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--orange),#EB7342);border-radius:4px}
+.share-pct{font-size:12px;font-weight:700;color:var(--navy);min-width:34px;text-align:right}
+.summary-note{font-size:11px;color:var(--gray);margin-top:10px;line-height:1.5}
+
+/* ── PAINEL DE RESULTADO ── */
+.calc-result-panel{background:linear-gradient(160deg,#0B0D31 0%,#0A1660 100%);border-radius:var(--radius-xl);padding:28px;position:sticky;top:80px;box-shadow:0 12px 40px rgba(4,12,82,.3);border:1px solid rgba(255,255,255,.08)}
+.result-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.result-title{font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+.result-dot{width:8px;height:8px;border-radius:50%;background:#5dca80;box-shadow:0 0 0 3px rgba(93,202,165,.25)}
+.result-badge{font-size:10px;font-weight:600;padding:3px 10px;border-radius:12px;background:rgba(22,163,74,.2);color:#5dca80;border:.5px solid rgba(22,163,74,.3)}
+.result-metrics{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.result-metric{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,.06);border-radius:10px}
+.rm-left{display:flex;align-items:center;gap:8px}
+.rm-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rm-label{font-size:11px;color:#8899BB;line-height:1.3}
+.rm-val{font-size:15px;font-weight:700;color:#fff;white-space:nowrap}
+.rm-val.orange{color:var(--orange)}
+.rm-val.green{color:#5dca80}
+.result-divider{height:.5px;background:rgba(255,255,255,.1);margin:16px 0}
+.plan-box{background:linear-gradient(135deg,rgba(235,115,66,.15),rgba(235,115,66,.08));border:1px solid rgba(235,115,66,.35);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.plan-label{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.plan-name{font-size:18px;font-weight:700;color:var(--orange);margin-bottom:8px}
+.plan-features{display:flex;flex-wrap:wrap;gap:6px}
+.plan-feat{font-size:10px;font-weight:500;padding:3px 9px;border-radius:12px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);display:flex;align-items:center;gap:4px}
+.price-box{background:rgba(255,255,255,.05);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid rgba(255,255,255,.08)}
+.price-label{font-size:11px;color:#8899BB;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.price-val{font-size:38px;font-weight:700;color:var(--orange);line-height:1;letter-spacing:-1px}
+.price-period{font-size:13px;color:rgba(255,255,255,.5)}
+.price-total{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08)}
+.price-total-lbl{font-size:11px;color:#8899BB;text-transform:uppercase;letter-spacing:1px}
+.price-total-val{font-size:16px;font-weight:700;color:rgba(255,255,255,.75)}
+.price-note{font-size:10px;color:rgba(255,255,255,.35);margin-top:10px;line-height:1.6}
+.result-btns{display:flex;flex-direction:column;gap:8px}
+.result-btn-primary{width:100%;background:linear-gradient(135deg,var(--orange),#EB7342);color:#fff;border:none;border-radius:10px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;transition:all .18s;box-shadow:0 6px 18px rgba(235,115,66,.35);letter-spacing:.2px}
+.result-btn-primary:hover{background:linear-gradient(135deg,#ED501D,var(--orange));transform:translateY(-1px);box-shadow:0 8px 22px rgba(235,115,66,.45)}
+
+/* Modais */
+.vmscalc-modal{position:fixed;inset:0;background:rgba(4,12,82,.6);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);padding:16px}
+.vmscalc-modal-card{position:relative;background:#fff;border-radius:18px;padding:28px;width:100%;max-width:460px;max-height:84vh;overflow:auto;box-shadow:0 20px 60px rgba(4,12,82,.25)}
+.vmscalc-modal-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:10px;border:0;cursor:pointer;background:var(--off);color:var(--gray);font-size:18px;display:flex;align-items:center;justify-content:center}
+.vmscalc-modal-title{font-size:15px;font-weight:700;color:var(--navy)}
+.vmscalc-modal-sub{font-size:13px;color:var(--gray);margin:4px 0 16px}
+.hc-days{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.hc-day{font-size:12px;font-weight:600;border:1.5px solid var(--lgray);background:#fff;color:var(--gray);border-radius:8px;padding:6px 12px;cursor:pointer}
+.hc-day.on{border-color:var(--orange);background:var(--orange-l);color:var(--orange-d)}
+.hc-times{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.hc-times label{font-size:12px;font-weight:600;color:var(--gray);display:block;margin-bottom:4px}
+.hc-times input{width:100%;padding:9px 12px;border-radius:8px;border:1.5px solid var(--lgray);font-family:inherit;font-size:14px;color:var(--navy);outline:none}
+.modal-apply{width:100%;background:linear-gradient(135deg,var(--orange),#EB7342);color:#fff;border:0;border-radius:10px;padding:13px;font-size:14px;font-weight:700;cursor:pointer}
+.res-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.res-grid button{font-size:13px;font-weight:500;border:1.5px solid var(--lgray);background:var(--off);color:var(--dark);border-radius:8px;padding:10px 12px;text-align:left;cursor:pointer}
+.res-grid button.on{border-color:var(--orange);background:var(--orange-l);color:var(--orange-d)}
+
+/* Responsivo */
+@media(max-width:1024px){
+  .calc-grid{grid-template-columns:1fr;gap:24px}
+  .calc-result-panel{position:static}
+}
+@media(max-width:640px){
+  .vms-cards{grid-template-columns:repeat(2,1fr)}
+  .form-row{grid-template-columns:1fr}
+  .rec-grid{grid-template-columns:1fr 1fr}
+  .calc-form-panel{padding:18px}
+  .vmscalc-section{padding:24px 16px 48px}
+  .step-title{font-size:18px}
+  /* Cabeçalho do grupo quebra em telas pequenas: nome em cima, custo+remover embaixo */
+  .group-head{flex-wrap:wrap}
+  .group-name-input{flex:1 1 120px}
+  .group-head-cost{font-size:14px}
+  .rec-btn{padding:12px 6px 10px}
+  .rec-btn-icon-wrap{width:38px;height:38px;margin-bottom:6px}
+  .price-val{font-size:32px}
+  .vmscalc-header-inner{padding:0 16px}
+}
+@media(max-width:380px){
+  .vms-cards{grid-template-columns:1fr 1fr}
+  .pill-opt{padding:6px 12px}
+}

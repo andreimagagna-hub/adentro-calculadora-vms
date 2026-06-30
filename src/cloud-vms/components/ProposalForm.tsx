@@ -2,11 +2,12 @@ import { useState } from "react";
 import { T } from "../theme/tokens";
 import { IconCheck, IconSend, IconLock } from "./icons";
 import { saveVmsLead, type Lead } from "../lib/api";
-import { fmtR, fmtGB, fmtMbps, type CalcInput, type CalcResult } from "../lib/calc";
+import { fmtR, fmtGB, fmtMbps, type GroupInput, type CalcResult } from "../lib/calc";
 
 interface ProposalFormProps {
   lead: Lead;
-  input: CalcInput;
+  vms: string;
+  groups: GroupInput[];
   result: CalcResult;
   onClose: () => void;
 }
@@ -14,18 +15,19 @@ interface ProposalFormProps {
 /* ───────────── PROPOSTA (envia lead + dimensionamento) ─────────────
    A qualificação (cargo, funcionários, cotando, previsão) e o contato já
    foram captados no gate / no formulário do site — aqui só confirmamos. */
-export function ProposalForm({ lead, input, result, onClose }: ProposalFormProps) {
+export function ProposalForm({ lead, vms, groups, result, onClose }: ProposalFormProps) {
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const temContato = Boolean(lead.nome || lead.empresa || lead.email || lead.whatsapp);
   const nomeCompleto = [lead.nome, lead.sobrenome].filter(Boolean).join(" ") || undefined;
+  const totalCameras = groups.reduce((s, g) => s + Math.max(1, g.cameras || 1), 0);
 
   const submit = async () => {
     setSending(true);
     setError(null);
-    const res = await saveVmsLead(lead, input, result);
+    const res = await saveVmsLead(lead, vms, groups, result);
     setSending(false);
     if (res.ok) setDone(true);
     else setError(res.error || "Não foi possível enviar agora. Tente novamente.");
@@ -87,7 +89,8 @@ export function ProposalForm({ lead, input, result, onClose }: ProposalFormProps
             {/* resumo do dimensionamento */}
             <div className="mt-3 rounded-2xl p-4 space-y-1.5" style={{ background: T.tint, border: `1px solid ${T.orange}33` }}>
               <Row label="Plano" value={result.planName} strong />
-              <Row label="Câmeras" value={`${input.cameras}`} />
+              <Row label="Grupos de câmeras" value={`${groups.length}`} />
+              <Row label="Câmeras (total)" value={`${totalCameras}`} />
               <Row label="Storage útil" value={fmtGB(result.storageUtilGB)} />
               <Row label="Link ideal" value={fmtMbps(result.linkIdealMbps)} />
               <Row label="Investimento" value={`${fmtR(result.custoTotal)}/mês`} strong />
